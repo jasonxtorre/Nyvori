@@ -23,17 +23,35 @@
     }
 
     /* Snap scrolling container */
-    .snap-container {
+    /* .snap-container {
       scroll-snap-type: y mandatory;
       overflow-y: scroll;
       height: 100vh;
-    }
+    } */
+
+    @media (min-width: 768px) {
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  section.about-section {
+    scroll-snap-align: end;
+  }
+}
+
 
     /* Each section snaps */
-    section {
+    /* section {
       scroll-snap-align: start;
       scroll-snap-stop: always;
-    }
+    } */
 
     /* Ensure 100vh for each section for proper snapping */
 section.hero,
@@ -135,11 +153,17 @@ header.hidden {
 
 @media (max-width: 768px) {
   .menu-drawer {
-    width: 100vw; /* Full width on phones */
+    width: 100vw;
     left: -100vw;
+  }
+  .menu-drawer.menu-open {
+    left: 0;
   }
 }
 
+.menu-drawer.menu-open {
+  left: 0;
+}
 
 
 .menu-drawer ul {
@@ -166,12 +190,6 @@ header.hidden {
 
 .menu-drawer ul li a:hover {
   color: white;
-}
-
-/* Show drawer when hovering menu */
-.menu:hover + .menu-drawer,
-.menu-drawer:hover {
-  left: 0;
 }
 
     .logo {
@@ -552,27 +570,24 @@ header.hidden {
 
 
   <header>
-    <div class="menu">Menu</div>
-    <div class="menu-drawer">
-  <ul>
-<li><a href="#hero">Home</a></li>
-<li><a href="#try">Try Our Product</a></li>
-<li><a href="#software">Our Software</a></li>
-<li><a href="#pricing">Pricing</a></li>
-<li><a href="#about">About Us</a></li>
-<li><a href="#contact">Contact Us</a></li>
+    <div class="menu" id="menuToggle">Menu</div>
 
-<div class="menu-cta-button">
-    <a
-      href="https://calendly.com/nyvori-co/30min?back=1"
-      target="_blank"
-      rel="noopener"
-    >
-      Book a Meeting
-    </a>
-  </div>
-  </ul>
+  <div class="menu-drawer">
+  <button class="close-drawer" id="closeDrawerBtn">✕</button>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#try">Try Our Product</a></li>
+    <li><a href="#software">Our Software</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    <div class="menu-cta-button">
+      <a href="https://calendly.com/nyvori-co/30min?back=1" target="_blank" rel="noopener">Book a Meeting</a>
+    </div>
+
 </div>
+
 
     <div class="contact-us-button">
   <a href="https://calendly.com/nyvori-co/30min?back=1" target="_blank" rel="noopener" class="futuristic-button">
@@ -716,7 +731,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </section>
 <section id="pricing" class="pricing-section carousel-mode">
-  <h2 class="section-glow">Businesses We Help</h2>
+  <h2 class="section-glow">Get A Quote</h2>
   <p class="pricing-subtext">From neighborhood shops to national firms — our virtual receptionists adapt to every industry.</p>
 
   <div class="carousel-container">
@@ -1296,6 +1311,24 @@ document.addEventListener("DOMContentLoaded", function () {
   text-align: center;
 }
 
+.close-drawer {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: color 0.3s ease;
+}
+
+.close-drawer:hover {
+  color: #4C8ED9;
+}
+
+
 .menu-cta-button a {
   display: block;
   width: 100%;
@@ -1350,6 +1383,31 @@ document.addEventListener("DOMContentLoaded", function () {
   animation: none;
   letter-spacing: 0.03em;
 }
+
+@media (max-width: 768px) {
+  .section-glow {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-glow {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .bubble-right,
+  .bubble-top-right {
+    display: none;
+  }
+
+  .bubble-bottom {
+    margin-top: 1rem;
+  }
+}
+
 
 
 @keyframes glowPulse {
@@ -1452,7 +1510,7 @@ background: linear-gradient(to bottom right, #1a1a1a, #1e2a3a);
   color: white;
   text-align: center;
 }
-
+/* 
 .pricing-section h2 {
   font-size: 3.5rem;
   font-weight: 700;
@@ -1460,7 +1518,7 @@ background: linear-gradient(to bottom right, #1a1a1a, #1e2a3a);
   text-transform: uppercase;
   color: #4C8ED9;
   margin-bottom: 1rem;
-}
+} */
 
 .pricing-subtext {
   font-size: 1.2rem;
@@ -1873,9 +1931,9 @@ background: linear-gradient(to bottom right, #1a1a1a, #1e2a3a);
     font-size: 0.95rem;       /* shrink paragraph text too */
   }
 
-  .pricing-section h2 {
+  /* .pricing-section h2 {
     font-size: 2.2rem;
-  }
+  } */
 }
 .about-text {
   flex: 1;
@@ -2000,14 +2058,6 @@ background: linear-gradient(to bottom right, #1a1a1a, #1e2a3a);
   text-align: center;
 }
 
-.pricing-section h2 {
-  font-size: 4rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #4C8ED9;
-}
-
 </style>
 
 <script>
@@ -2101,21 +2151,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIndex = 0;
   let isPaused = false;
   let intervalId;
-  let hoverTimeout;
 
   function activateItem(index) {
-    listItems.forEach((item) => {
+    listItems.forEach((item, i) => {
       item.classList.remove('active');
       item.querySelector('.progress-bar').style.width = '0%';
-      const existingWave = item.querySelector('.voicewave-inline');
-      if (existingWave) existingWave.remove();
+
+      const wave = item.querySelector('.voicewave-inline');
+      if (wave) wave.remove();
     });
 
     const item = listItems[index];
     item.classList.add('active');
     item.querySelector('.progress-bar').style.width = '100%';
 
-    // Add voicewave gif
     const waveImg = document.createElement('img');
     waveImg.src = 'assets/voicewave.gif';
     waveImg.alt = 'voicewave animation';
@@ -2130,32 +2179,33 @@ document.addEventListener('DOMContentLoaded', () => {
         activateItem(currentIndex);
         currentIndex = (currentIndex + 1) % listItems.length;
       }
-    }, 15000); // 15s per item
+    }, 15000);
   }
 
-  // Hover-based activation with 1s delay
+  // Desktop: hover
   listItems.forEach((item, i) => {
     item.addEventListener('mouseenter', () => {
       isPaused = true;
-      clearTimeout(hoverTimeout);
-
-      hoverTimeout = setTimeout(() => {
-        activateItem(i);
-        currentIndex = (i + 1) % listItems.length; // resume from this point
-      }, 50); // 1s delay before activating
+      activateItem(i);
+      currentIndex = (i + 1) % listItems.length;
     });
 
     item.addEventListener('mouseleave', () => {
-      clearTimeout(hoverTimeout);
       isPaused = false;
+    });
+
+    // Mobile: tap/click
+    item.addEventListener('click', () => {
+      isPaused = true;
+      activateItem(i);
+      currentIndex = (i + 1) % listItems.length;
     });
   });
 
-  // Start initially
+  // Start with first item
   activateItem(currentIndex);
   startCycle();
 });
-
 </script>
 
 <script>
@@ -2275,40 +2325,32 @@ function updateCarousel() {
   updateCarousel();
 });
 </script>
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    const scrollContainer = document.querySelector('.snap-container');
-    let lastScrollTop = 0;
-    let ticking = false;
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('menuToggle');
+  const menuDrawer = document.querySelector('.menu-drawer');
+  const closeBtn = document.getElementById('closeDrawerBtn');
 
-    function onScroll() {
-      const currentScrollTop = scrollContainer.scrollTop;
+  // Open the drawer
+  menuBtn.addEventListener('click', () => {
+    menuDrawer.classList.add('menu-open');
+  });
 
-      if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
-        // scrolling down
-        header.classList.add('hidden');
-      } else {
-        // scrolling up
-        header.classList.remove('hidden');
-      }
+  // Close the drawer
+  closeBtn.addEventListener('click', () => {
+    menuDrawer.classList.remove('menu-open');
+  });
 
-      lastScrollTop = currentScrollTop;
-      ticking = false;
-    }
-
-    scrollContainer.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(onScroll);
-        ticking = true;
-      }
+  // Close on any internal anchor link
+  const anchorLinks = menuDrawer.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuDrawer.classList.remove('menu-open');
     });
   });
+});
 </script>
-
-
-
-
 
 </body>
 </html>
