@@ -2394,7 +2394,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (targetEl) {
         const headerHeight = header ? header.offsetHeight : 80;
-        const buffer = 18; // extra scroll buffer
+        const buffer = -10; // extra scroll buffer
         const scrollOffset = headerHeight + buffer;
 
         const top = targetEl.getBoundingClientRect().top + window.pageYOffset - scrollOffset;
