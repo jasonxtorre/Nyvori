@@ -222,6 +222,27 @@ header.hidden {
       transition: opacity 1s ease, transform 1s ease;
       margin-top: 1.5rem;
     }
+
+    @media (max-width: 768px) {
+  .centered h1 {
+    font-size: 14vw; /* bigger than the current 10vw */
+  }
+
+  .subtext {
+    font-size: 4vw;  /* more readable on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .centered h1 {
+    font-size: 16vw; /* even larger on tiny screens */
+  }
+
+  .subtext {
+    font-size: 5vw;
+  }
+}
+
     .subtext.visible {
       opacity: 1;
       transform: translateY(0);
@@ -437,7 +458,7 @@ header.hidden {
   top: 50%;
   left: 50%;
   width: 1000vw;
-  max-width: 1000px;
+  max-width: 800px;
   height: auto;
   transform: translate(-50%, -50%) scale(2.8); /* START: big */
   opacity: 1; /* fully visible at first */
@@ -2359,9 +2380,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const OFFSET = 80; // Same as scroll-padding-top
   const menuLinks = document.querySelectorAll('.menu-drawer a[href^="#"]');
 
   menuLinks.forEach(link => {
@@ -2369,17 +2390,27 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const targetId = this.getAttribute("href").substring(1);
       const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        const top = targetEl.getBoundingClientRect().top + window.pageYOffset - OFFSET;
-        window.scrollTo({ top, behavior: "smooth" });
+      const header = document.querySelector("header");
 
-        // Optional: close drawer on mobile
+      if (targetEl) {
+        const headerHeight = header ? header.offsetHeight : 80;
+        const buffer = 12; // extra scroll buffer
+        const scrollOffset = headerHeight + buffer;
+
+        const top = targetEl.getBoundingClientRect().top + window.pageYOffset - scrollOffset;
+
+        window.scrollTo({
+          top,
+          behavior: "smooth"
+        });
+
         document.querySelector(".menu-drawer").classList.remove("menu-open");
       }
     });
   });
 });
 </script>
+
 
 
 </body>
