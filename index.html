@@ -121,14 +121,24 @@ header.hidden {
 .menu-drawer {
   position: fixed;
   top: 0;
-  left: -40vw; /* increased width */
+  left: -40vw;
   width: 40vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.95);
   padding-top: 6rem;
   transition: left 0.3s ease;
   z-index: 999;
+  overflow-y: auto; /* ✅ Enable vertical scroll */
+  overscroll-behavior: contain;
 }
+
+@media (max-width: 768px) {
+  .menu-drawer {
+    width: 100vw; /* Full width on phones */
+    left: -100vw;
+  }
+}
+
 
 
 .menu-drawer ul {
@@ -547,8 +557,9 @@ header.hidden {
 <li><a href="#hero">Home</a></li>
 <li><a href="#try">Try Our Product</a></li>
 <li><a href="#software">Our Software</a></li>
-<li><a href="#about">Pricing</a></li>
-<li><a href="#contact">About Us</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#about">About Us</a></li>
+<li><a href="#contact">Contact Us</a></li>
 
 <div class="menu-cta-button">
     <a
