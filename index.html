@@ -1,1410 +1,2708 @@
-<!doctype html>
-<html lang="en" class="tw-dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Nyvori</title>
-        <meta name="description" content="Automate your receptionist for your business. Never miss a call again." />
-        <link
-            rel="shortcut icon"
-            href="./assets/logo/logo.png"
-            type="image/x-icon"
-        />
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:title" content="Nyvori" />
-        <meta property="og:description" content="Automate your receptionist for your business. Never miss a call again." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://github.com/PaulleDemon" />
-        <meta property="og:image" content="" />
-
-        <!-- <link rel="stylesheet" href="css/tailwind-runtime.css" /> -->
-        <link rel="stylesheet" href="css/tailwind-build.css">
-        <link rel="stylesheet" href="css/index.css" />
-
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
-            integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-');
-        </script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nyvori</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+<script>smoothscroll.polyfill();</script>
 
 
-    </head>
-    <body
-        class="tw-flex tw-min-h-[100vh] tw-flex-col tw-bg-[#fcfcfc] 
-            tw-text-black dark:tw-bg-black  dark:tw-text-white"
-    >
-        <!-- <div class="tw-absolute tw-top-0 tw-left-1/2 tw--translate-x-1/2 tw-flex 
-                    tw-h-[100px] tw-w-full tw-max-w-[80%]">
-            <div class="header-gradient tw-h-full tw-w-full "></div>
-        </div> -->
+  <style>
+    html {
+  scroll-padding-top: 80px; /* adjust if your fixed header is tall */
+}
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: black;
+      color: white;
+      scroll-behavior: smooth;
+    }
 
-        <header
-            class="lg:tw-px-4 tw-max-w-[100vw] tw-max-w-lg:tw-mr-auto max-lg:tw-top-0 tw-fixed tw-top-4 lg:tw-left-1/2 lg:tw--translate-x-1/2 tw-z-20 tw-flex tw-h-[60px] tw-w-full 
-                    tw-text-gray-700 tw-bg-white dark:tw-text-gray-200 dark:tw-bg-[#17181b] tw-px-[3%] tw-rounded-md lg:tw-max-w-5xl tw-shadow-md dark:tw-shadow-gray-700
-                    lg:tw-justify-around lg:!tw-backdrop-blur-lg lg:tw-opacity-[0.99]"
-        >
-            <a class="tw-flex tw-p-[4px] tw-gap-2 tw-place-items-center" href="#">
-               
+    /* Snap scrolling container */
+    /* .snap-container {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    } */
 
-                <div class="tw-h-[30px] tw-max-w-[100px]">
-                    <img
-                        src="./assets/logo/logo.png"
-                        alt="logo"
-                        class="tw-object-contain tw-h-full tw-w-full dark:tw-invert"
-                    />
-                </div>
-                <span class="tw-uppercase tw-text-base tw-font-medium">Nyvori</span>
-            </a>
-            <div
-                class="collapsible-header animated-collapse max-lg:tw-shadow-md"
-                id="collapsed-header-items"
-            >
-                <nav
-                    class="tw-relative tw-flex tw-h-full max-lg:tw-h-max tw-w-max tw-gap-5 tw-text-base max-lg:tw-mt-[30px] max-lg:tw-flex-col 
-                                max-lg:tw-gap-5 lg:tw-mx-auto tw-place-items-center"
-                >
-                    <a class="header-links" href="#"> API </a>
-                    <a class="header-links" href="#"> Blog </a>
-                    <a class="header-links" href="#"> Solutions </a>
-                   
-                    <div class="tw-relative tw-flex tw-flex-col tw-place-items-center">
-                        <div id="nav-dropdown-toggle-0" class="max-lg:tw-max-w-fit tw-flex header-links tw-gap-1  tw-place-items-center">
-                            <span class=""> Features </span>
-                            <i class="tw-text-sm bi bi-chevron-down"></i>
-                        </div>
-                        <nav id="nav-dropdown-list-0" 
-                            data-open="false"
-                            class="tw-scale-0 tw-opacity-0  lg:tw-fixed tw-flex lg:tw-top-[80px] lg:tw-left-1/2 lg:tw--translate-x-1/2 
-                                    tw-w-[90%] tw-rounded-lg max-lg:tw-h-0 max-lg:tw-w-0
-                                    lg:tw-h-[450px] tw-overflow-hidden
-                                     tw-bg-white dark:tw-bg-[#17181B] tw-duration-300 
-                                     tw-transition-opacity tw-transition-height tw-shadow-lg tw-p-4">
-                            <div class="tw-grid max-xl:tw-flex max-xl:tw-flex-col tw-justify-around tw-grid-cols-2 tw-w-full">
-                                <a class="header-links tw-flex tw-text-left tw-gap-4 !tw-p-4" href="#">
-                                    <div class="tw-font-semibold tw-text-3xl">
-                                        <i class="bi bi-list-columns-reverse"></i>
-                                    </div>
-                                    <div class="tw-flex tw-flex-col tw-gap-2">
-                                        <div class="tw-text-lg tw-text-black dark:tw-text-white tw-font-medium">Prompt library </div>
-                                        <p>Comes packed with pre-made prompt templates</p>
-                                    </div> 
-                                </a>
+    @media (min-width: 768px) {
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
 
-                                <a class="header-links tw-flex tw-text-left tw-gap-4 !tw-p-4" href="#">
-                                    <div class="tw-font-semibold tw-text-3xl">
-                                        <i class="bi bi-grid-1x2-fill"></i>
-                                    </div>
-                                    <div class="tw-flex tw-flex-col tw-gap-2">
-                                        <div class="tw-text-lg tw-text-black dark:tw-text-white tw-font-medium">Unified Interface </div>
-                                        <p class="">Test multiple AI models in one interface</p>
-                                    </div> 
-                                </a>
+  section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
 
-                                <a class="header-links tw-flex tw-text-left tw-gap-4 !tw-p-4" href="#">
-                                    <div class="tw-font-semibold tw-text-3xl">
-                                        <i class="bi bi-globe"></i>
-                                    </div>
-                                    <div class="tw-flex tw-flex-col tw-gap-2">
-                                        <div class="tw-text-lg tw-text-black dark:tw-text-white tw-font-medium">Realtime web search </div>
-                                        <p class="">Search the internet in realtime</p>
-                                    </div> 
-                                </a>
-
-                                <a class="header-links tw-flex tw-text-left tw-gap-4 !tw-p-4" href="#">
-                                    <div class="tw-font-semibold tw-text-3xl">
-                                        <i class="bi bi-image-fill"></i>
-                                    </div>
-                                    <div class="tw-flex tw-flex-col tw-gap-2">
-                                        <div class="tw-text-lg tw-text-black dark:tw-text-white tw-font-medium">
-                                            Image generation
-                                        </div>
-                                        <p class="">Generate images from prompts</p>
-                                    </div> 
-                                </a>
-
-                                <a class="header-links tw-flex tw-text-left tw-gap-4 !tw-p-4" href="#">
-                                    <div class="tw-font-semibold tw-text-3xl">
-                                        <i class="bi bi-calendar-range"></i>
-                                    </div>
-                                    <div class="tw-flex tw-flex-col tw-gap-2">
-                                        <div class="tw-text-lg tw-text-black dark:tw-text-white tw-font-medium">
-                                            History
-                                        </div>
-                                        <p class="">Continue from where you left off</p>
-                                    </div> 
-                                </a>
-
-                                <a class="header-links tw-flex tw-text-left tw-gap-4 !tw-p-4" href="#">
-                                    <div class="tw-font-semibold tw-text-3xl">
-                                        <i class="bi bi-translate"></i>
-                                    </div>
-                                    <div class="tw-flex tw-flex-col tw-gap-2">
-                                        <div class="tw-text-lg tw-text-black dark:tw-text-white tw-font-medium">
-                                            Multilingual
-                                        </div>
-                                        <p class="">Converse in multiple languages</p>
-                                    </div> 
-                                </a>
-                            </div>           
-                        </nav>
-                    </div>
-                    <a class="header-links" href="#pricing"> Pricing </a>
-                    
-                </nav>
-                <div
-                    class="lg:tw-mx-4 tw-flex tw-place-items-center tw-gap-[20px] tw-text-base max-md:tw-w-full 
-                            max-md:tw-flex-col max-md:tw-place-content-center"
-                >
-                    <button type="button" onclick="toggleMode()" class="header-links tw-text-gray-600 dark:tw-text-gray-300" title="toggle-theme" 
-                            id="theme-toggle"> 
-                        <i class="bi bi-sun" id="toggle-mode-icon"></i>
-                    </button>
-                    <a
-                        href="https://calendly.com/contact-nyvori/30min"
-                        aria-label="Book a Call"
-                        class="btn tw-flex tw-gap-3 tw-px-3 tw-py-2 tw-transition-transform 
-                                    tw-duration-[0.3s] hover:tw-translate-x-2"
-                    >
-                        <span>Book a Call</span>
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <button
-                class="bi bi-list tw-absolute tw-right-3 tw-top-3 tw-z-50 tw-text-3xl tw-text-gray-500 lg:tw-hidden"
-                onclick="toggleHeader()"
-                aria-label="menu"
-                id="collapse-btn"
-            ></button>
-        </header>
-
-        <section
-            class="hero-section tw-relative tw-mt-20 tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden max-lg:tw-mt-[100px]"
-            id="hero-section"
-        >
-
-            <!-- video container -->
-            <div class="tw-fixed tw-bg-[#000000af] dark:tw-bg-[#80808085] tw-top-0 tw-left-1/2 tw--translate-x-1/2 tw-z-20 tw-transition-opacity
-                tw-duration-300 tw-scale-0 tw-opacity-0 tw-p-2
-                tw-w-full tw-h-full tw-flex tw-place-content-center tw-place-items-center" id="video-container-bg">
-
-                <div class="tw-max-w-[80vw] max-lg:tw-max-w-full max-lg:tw-w-full tw-scale-0 tw-transition-transform tw-duration-500 tw-p-6 tw-rounded-xl  max-lg:tw-px-2 tw-w-full tw-gap-2 tw-shadow-md 
-                            tw-h-[90vh] max-lg:tw-h-auto max-lg:tw-min-h-[400px] tw-bg-white dark:tw-bg-[#16171A] tw-max-h-full
-                            " id="video-container">
-                    <div class="tw-w-full tw-flex">
-                        <button type="button" onclick="closeVideo()" class="tw-ml-auto tw-text-xl" title="close">
-                            <i class="bi bi-x-circle-fill"></i>
-                        </button>
-                    </div>
-                    <div class="tw-flex tw-w-full  tw-rounded-xl tw-px-[5%] max-md:tw-px-2 tw-min-h-[300px] tw-max-h-[90%] tw-h-full">
-
-                        <div class="tw-relative tw-bg-black tw-min-w-full tw-min-h-full tw-overflow-clip tw-rounded-md">
-                            <!-- add your youtube video link here -->
-                            <iframe class="tw-absolute tw-top-[50%] tw--translate-y-[50%] tw-left-[50%] tw--translate-x-[50%] tw-w-full tw-h-full" 
-                                src="https://www.youtube.com/embed/6j4fPVkA3EA?si=llcTrXPRM-MRXDZB&amp;controls=0&rel=0&showinfo=0&autoplay=1&loop=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-        
-                    </div>
-                </div>  
-            </div>
-
-            <div    
-                class="hero-bg-gradient tw-relative tw-flex tw-h-full tw-min-h-[100vh] tw-w-full tw-flex-col tw-place-content-center tw-gap-6 tw-p-[5%] max-xl:tw-place-items-center max-lg:tw-p-4"
-            >
-
-                <div class="purple-bg-grad  reveal-up tw-absolute tw-left-1/2 tw--translate-1/2 tw-top-[10%] tw-h-[120px] tw-w-[120px]"
-                ></div> 
-
-                <div
-                    class="tw-flex tw-flex-col tw-min-h-[60vh] tw-place-content-center tw-items-center"
-                >
-                    <h2
-                        class="reveal-up tw-text-center tw-text-7xl tw-font-semibold tw-uppercase tw-leading-[90px] max-lg:tw-text-4xl max-md:tw-leading-snug"
-                    >
-                        <span class=""> Never Miss A Call </span>
-                        <br />
-                        <span class="tw-font-thin tw-font-serif"> Never Miss A Customer</span>
-                    </h2>
-                    <div
-                        class="reveal-up tw-mt-8 tw-max-w-[450px] tw-text-lg max-lg:tw-text-base tw-p-2 tw-text-center
-                         tw-text-gray-800 dark:tw-text-white max-lg:tw-max-w-full"
-                    >
-                        <!-- Test, Develop and Deploy all your AI models in one place, with Pixa seamless playground interface -->
-                        Deliver better service on every call. Nyvori answers, schedules, and follows up—so no client slips through the cracks.
-
-                    </div>
-
-                    <div
-                        class="reveal-up tw-mt-10 max-md:tw-flex-col tw-flex tw-place-items-center tw-gap-4"
-                    >
-
-                        <button onclick="openVideo()"
-                            class="btn !tw-w-[170px] max-lg:!tw-w-[160px] !tw-rounded-xl !tw-py-4 max-lg:!tw-py-2 tw-flex tw-gap-2 tw-group !tw-bg-transparent !tw-text-black dark:!tw-text-white tw-transition-colors 
-                                        tw-duration-[0.3s] tw-border-[1px] tw-border-black dark:tw-border-white"
-                        >
-                            
-                            <div class="tw-relative tw-flex tw-place-items-center tw-place-content-center tw-w-6 tw-h-6">
-                                <div class="tw-absolute tw-inset-0 tw-top-0 tw-left-0 tw-scale-0 tw-duration-300 group-hover:tw-scale-100 tw-border-2
-                                             tw-border-gray-600 dark:tw-border-gray-200 tw-rounded-full tw-w-full tw-h-full"></div>
-                                <span class="bi bi-play-circle-fill"></span>
-                            </div>
-                            <span>Watch video</span>
-                        </button>
-
-                        <a
-                            class="btn tw-group max-lg:!tw-w-[160px] tw-flex tw-gap-2 tw-shadow-lg !tw-w-[170px] !tw-rounded-xl !tw-py-4 max-lg:!tw-py-2 tw-transition-transform tw-duration-[0.3s] hover:tw-scale-x-[1.03]"
-                            href="https://calendly.com/contact-nyvori/30min"
-                        >
-                            <span>Book a Call</span>
-                            <i class="bi bi-arrow-right group-hover:tw-translate-x-1 tw-duration-300"></i>
-                        </a>
-                        
-                    </div>
-                </div>
-                
-                <!-- prompt container -->
-
-            </div>
-        </section>
-
-        <section
-            class="tw-relative tw-flex tw-w-full tw-max-w-[100vw] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden tw-p-8"
-        >
-            <h2 class="reveal-up tw-text-3xl max-md:tw-text-xl">
-                Supporting All Industries
-            </h2>
-
-            <div class="reveal-up carousel-container">
-                <div
-                    class="carousel lg:w-place-content-center tw-mt-10 tw-flex tw-w-full tw-gap-5 max-md:tw-gap-2"
-                >
-                    <!-- add the brands using your app  -->
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo plumbing">🛠️ Plumbing</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo roofing"><i class="bi bi-house-fill"></i> Roofing</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo spa">🧖‍♀️ Spa</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo construction">🏗️ Construction</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo medspa">💉 Med Spa</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo hvac">❄️ HVAC</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo dental">🦷 Dental</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo legal">⚖️ Legal</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo cleaning">🧼 Cleaning</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo tutoring">📚 Tutoring</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo fitness">💪 Fitness</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo landscaping">🌿 Landscaping</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo realestate">🏡 Real Estate</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo salon">✂️ Salon</div>
-                    </div>
-                    <div class="carousel-img tw-h-[30px] tw-w-[150px]">
-                    <div class="industry-logo vet">🐾 Veterinary</div>
-                    </div>
+  section.about-section {
+    scroll-snap-align: end;
+  }
+}
 
 
+    /* Each section snaps */
+    /* section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    } */
 
-                </div>
-            </div>
-        </section>
+    /* Ensure 100vh for each section for proper snapping */
+section.hero,
+section.try-section,
+section.software-highlight-section,
+section.pricing-section,
+section.contact-section {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+section.about-section {
+  min-height: 100vh;
+  height: auto;
+  scroll-snap-align: end; /* 👈 restore snap behavior */
+  scroll-snap-stop: always;
+  overflow: visible;
+}
 
-            
-        <section
-            class="tw-relative tw-flex  tw-w-full tw-min-h-[100vh] max-lg:tw-min-h-[80vh] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden"
-        >   
-             <div class="tw-w-full  tw-place-content-center tw-items-center 
-                        tw-flex tw-flex-col tw-max-w-[900px] tw-gap-4 tw-p-4">
-               <div class="purple-bg-grad  reveal-up tw-absolute tw-right-[20%] tw-top-[20%] tw-h-[200px] tw-w-[200px]"
-                ></div>
-                <h2 class="reveal-up tw-text-6xl max-lg:tw-text-4xl tw-text-center tw-leading-normal tw-uppercase">
-                    <br>
-                    <span class="tw-font-semibold">Test Our Product Today </span>
-                    <br>
-                </h2>
 
-                <div class="try-phone">
+    /* Optional enhancement: prevent iOS rubberbanding */
+    .snap-container {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
+  .hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      background: black;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: transparent;
+  transition: background-color 0.4s ease, box-shadow 0.3s ease, top 0.4s ease;
+}
+
+/* Solid nav when scrolled */
+header.scrolled {
+  background-color: black;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+header.hidden {
+  top: -100px; /* hide off top */
+}
+
+.menu {
+  color: #ccd6f6;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Optional hover glow */
+.menu:hover {
+  color: #3C7FCB;
+}
+
+.menu-drawer {
+  position: fixed;
+  top: 0;
+  left: -40vw;
+  width: 40vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  padding-top: 6rem;
+  transition: left 0.3s ease;
+  z-index: 999;
+  overflow-y: auto; /* ✅ Enable vertical scroll */
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 768px) {
+  .menu-drawer {
+    width: 100vw;
+    left: -100vw;
+  }
+  .menu-drawer.menu-open {
+    left: 0;
+  }
+}
+
+.menu-drawer.menu-open {
+  left: 0;
+}
+
+
+.menu-drawer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-drawer ul li {
+  padding: 1.5rem 2.5rem; /* more padding for spacing */
+}
+
+
+.menu-drawer ul li a {
+  color: #4C8ED9; /* softened purple */
+  text-decoration: none;
+  font-size: 1.6rem; /* much larger */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: color 0.3s ease;
+  display: block;
+}
+
+.menu-drawer ul li a:hover {
+  color: white;
+}
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 100%;
+      padding: 0 2rem;
+    }
+    .centered h1 {
+      font-size: 10vw;
+      font-weight: 700;
+      line-height: 1.1;
+      word-spacing: 0.1em;
+    }
+    .subtext {
+      font-size: 2vw;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+  .centered h1 {
+    font-size: 14vw; /* bigger than the current 10vw */
+  }
+
+  .subtext {
+    font-size: 4vw;  /* more readable on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .centered h1 {
+    font-size: 16vw; /* even larger on tiny screens */
+  }
+
+  .subtext {
+    font-size: 5vw;
+  }
+}
+
+    .subtext.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .bottom-left {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .popup-arrow {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 1 forwards;
+      animation-delay: 2s;
+    }
+    .popup-arrow .arrow {
+      font-size: 2rem;
+      display: block;
+      animation: bounce 1.5s infinite;
+      margin-top: 0.5rem;
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(8px);
+      }
+    }
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+  .effect-stack {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+  }
+
+  .img-layer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background-image: url('assets/receptionist.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translateY(120%);
+    animation: slideUp 0.6s ease-out forwards;
+    animation-play-state: paused;
+    animation-delay: calc(0.15s * var(--i));
+    opacity: 0;
+  }
+
+  .img-layer:nth-child(1) { top: 80%; background-position-y: 80%; }
+  .img-layer:nth-child(2) { top: 60%; background-position-y: 60%; }
+  .img-layer:nth-child(3) { top: 40%; background-position-y: 40%; }
+  .img-layer:nth-child(4) { top: 20%; background-position-y: 20%; }
+  .img-layer:nth-child(5) { top: 0%;  background-position-y: 0%;  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(120%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }.software-section {
+  background: #111;
+  color: white;
+  padding: 8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.software-title {
+  font-size: 3rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.software-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+.bubbles-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  overflow: hidden;
+}
+
+.bubble-item {
+  flex: 0 0 25%;
+  display: block;
+  opacity: 0.3;
+  transform: scale(0.95);
+  transition: all 0.4s ease;
+  background: #1a1a1a;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  min-height: 320px;
+}
+
+.bubble-item.focused {
+  flex: 0 0 35%;
+  opacity: 1;
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.bubble-item img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.bubble-item h3 {
+  font-size: 1.75rem;
+  margin: 1rem 0;
+  color: white;
+}
+
+.bubble-item p {
+  font-size: 1.05rem;
+  color: #ccc;
+  display: none;
+}
+
+.bubble-item.focused p {
+  display: block;
+  margin-top: 1rem;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid white;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  z-index: 2;
+}
+
+.carousel-btn.left {
+  left: -1rem;
+}
+
+.carousel-btn.right {
+  right: -1rem;
+}
+
+.carousel-btn:hover {
+  background: white;
+  color: black;
+}
+
+#hero-bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  pointer-events: none;
+}
+
+.intro-blob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1000vw;
+  max-width: 800px;
+  height: auto;
+  transform: translate(-50%, -50%) scale(2.8); /* START: big */
+  opacity: 1; /* fully visible at first */
+  z-index: 0;
+  pointer-events: none;
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
+}
+
+/* Shrinks and dims when typing starts */
+
+
+.intro-blob.typing {
+  opacity: 0.1;
+  animation: blobPulse 2.5s ease-in-out infinite;
+}
+
+
+/* After typing: re-expand and restore visibility */
+.intro-blob.show-final {
+  transform: translate(-50%, -50%) scale(2.8);
+  opacity: 1;
+}
+
+/* animate slowly during typing */
+.intro-blob.animate-in {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0.2;
+}
+.contact-us-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-us-button a {
+  text-decoration: none;
+}
+
+.futuristic-button {
+  position: relative;
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 1rem;
+  color: #ccd6f6;
+  background: transparent;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s ease, background 0.3s ease;
+  z-index: 1;
+}
+
+/* Sliding purple animation background */
+.futuristic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    #000000 0%,
+    #3C7FCB 20%,
+    #000000 40%,
+    #3C7FCB 60%,
+    #000000 80%
+  );
+  background-size: 200% auto;
+  animation: slide-purple 3s linear infinite;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+@keyframes slide-purple {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* On hover: subtle text glow */
+.futuristic-button:hover {
+  color: #4C8ED9;
+}
+
+
+/* Hover state */
+.futuristic-button:hover {
+  color: #000;
+  background: #3C7FCB;
+  border-color: #3C7FCB;
+  box-shadow: 0 0 15px rgba(159, 105, 255, 0.6), 0 0 40px rgba(159, 105, 255, 0.2);
+}
+
+/* Scrollbar styling for WebKit browsers */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111; /* Very dark track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444; /* Dark grey thumb */
+  border-radius: 10px;
+  border: 2px solid #111; /* Optional padding look */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666; /* Lighter on hover */
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #111;
+}
+
+
+</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+<body>
+    <div class="snap-container">
+
+
+  <header>
+    <div class="menu" id="menuToggle">Menu</div>
+
+  <div class="menu-drawer">
+  <button class="close-drawer" id="closeDrawerBtn">✕</button>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#try">Try Our Product</a></li>
+    <li><a href="#software">Our Software</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    <div class="menu-cta-button">
+      <a href="https://calendly.com/nyvori-co/30min?back=1" target="_blank" rel="noopener">Book a Meeting</a>
+    </div>
+
+</div>
+
+
+    <div class="contact-us-button">
+  <a href="https://calendly.com/nyvori-co/30min?back=1" target="_blank" rel="noopener" class="futuristic-button">
+    Book a Meeting
+  </a>
+</div>
+    <div class="logo">NY</div>
+  </header>
+
+  <section id="hero" class="hero">
+    <img id="hero-floating-graphic" src="assets/ai-circle.gif" alt="Floating Shape" class="intro-blob" />
+
+    <div class="centered">
+      <h1><span id="type-target"></span></h1>
+      <div id="subtext" class="subtext">
+        NEVER MISS A CALL<br />
+        NEVER MISS A CUSTOMER
+      </div>
+    </div>
+  </section>
+
+
+  <!-- <div id="popup-arrow" class="popup-arrow" style="display: none;">
+    <a href="#about" style="text-decoration: none; color: inherit;">
+      Explore our services
+      <span class="arrow">↓</span>
+    </a>
+</div> -->
+
+  <!-- <div class="bottom-left">
+    <p>Know Nothing Of</p>
+    <p>The Impossible</p>
+  </div> -->
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const gif = document.getElementById("hero-floating-graphic");
+
+  new Typed("#type-target", {
+    strings: [
+      "NEVER MISS A CALL",
+      "NEVER MISS A CUSTOMER",
+      "NYVORI"
+    ],
+    typeSpeed: 30,
+    backSpeed: 20,
+    backDelay: 1000,
+    startDelay: 300,
+    loop: false,
+    showCursor: false,
+    smartBackspace: true,
+
+    onBegin: function () {
+      gif.classList.add("typing"); // shrink + fade
+    },
+
+    onComplete: function () {
+      gif.classList.remove("typing"); // grow + brighten
+      document.getElementById("type-target").innerText = "NYVORI";
+      document.getElementById("subtext").classList.add("visible");
+      document.getElementById("popup-arrow").style.display = "block";
+    }
+  });
+});
+</script>
+
+<section id="try" class="try-section simplified-try">
+  <div class="try-container">
+    <div class="try-text">
+        <h2 style="color: white">Try Our Product</h2>
+  <p>Call us today to schedule a free consultation and experience how our intelligent AI receptionist can work for your business.</p>
+  <p>Our virtual agent answers calls, books appointments, and ensures your customers are never left hanging—even after hours.</p>
+  <p>Simple integration. Seamless support. Always on.</p>
+    </div>
+
+    <div class="try-phone">
       <div class="floating-phone">
         <div class="phone-frame">
-          <img src="assets/images/home/iphone-frame.png" alt="Phone Frame" class="phone-image" />
+          <img src="assets/iphone-frame.png" alt="Phone Frame" class="phone-image" />
           <div class="screen-content">
             <span class="call-icon">📞</span>
             <p class="phone-label">Call Our Receptionist</p>
-            <button class="call-button">Call Now</button>
+            <button class="call-button" disabled>Call Now</button>
           </div>
         </div>
       </div>
-      <br>
-      <p class="reveal-up tw-mt-8 tw-max-w-[650px] tw-text-gray-900 dark:tw-text-gray-200 tw-text-center max-md:tw-text-sm">   
-    Have questions or want to learn more about how Pixa can help your business? Give our AI-powered receptionist a call today to experience the product in action. You can ask questions, explore features, and even book an appointment with our team to get personalized guidance and support.
-</p>
     </div>
-  </div>
-                
-            </div>
-        </section>
-
-        
-
-        <section
-            class="tw-relative tw-mt-10 tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-place-items-center lg:tw-p-6"
-        >
-
-            <div
-                class="reveal-up tw-mt-[5%] tw-flex tw-h-full tw-w-full tw-place-content-center 
-                        tw-gap-2 tw-p-4 max-lg:tw-max-w-full max-lg:tw-flex-col"
-            >
-
-                <div
-                    class="tw-relative tw-flex tw-max-w-[30%] max-lg:tw-max-w-full tw-flex-col 
-                            tw-place-items-start tw-gap-4  tw-p-2 max-lg:tw-place-items-center 
-                            max-lg:tw-place-content-center max-lg:tw-w-full"
-                >
-                    <div
-                        class="tw-top-40 tw-flex tw-flex-col lg:tw-sticky tw-place-items-center tw-max-h-fit tw-max-w-[850px] max-lg:tw-max-h-fit max-lg:tw-max-w-[320px] tw-overflow-hidden"
-                    >
-                        <h2 class="tw-text-5xl tw-font-serif tw-text-center tw-font-medium  max-md:tw-text-3xl"
-                            >
-                            Our Software
-                        </h2>
-                        
-                        <a href="" class="btn !tw-mt-8 !tw-bg-transparent !tw-text-black 
-                                                !tw-border-[1px] !tw-border-black 
-                                                dark:!tw-border-white dark:!tw-text-white">
-                            Call For More Information
-                        </a>
-
-                    </div>
-                   
-                </div>
-
-                <div
-                    class="tw-flex tw-flex-col tw-gap-10 tw-h-full tw-max-w-1/2 max-lg:tw-max-w-full tw-px-[10%]
-                             max-lg:tw-px-4 max-lg:tw-gap-3 max-lg:tw-w-full lg:tw-top-[20%]
-                             tw-place-items-center
-                             "
-                >   
-                    <div class="reveal-up tw-h-[240px] tw-w-[450px] max-md:tw-w-full">
-                        <a href="#"
-                            class="tw-flex tw-w-full tw-h-full tw-gap-8 tw-rounded-xl 
-                                    hover:tw-shadow-lg dark:tw-shadow-[#171717] tw-duration-300 tw-transition-all
-                                  tw-p-8 tw-group/card"
-                        >
-                            <div class="tw-text-4xl max-md:tw-text-2xl">
-                                <i class="bi bi-clock-history"></i>
-                            </div>
-
-                            <div class="tw-flex tw-flex-col tw-gap-4">
-                                <h3 class="tw-text-2xl max-md:tw-text-xl">
-                                    Works Around The Clock
-                                </h3>
-                               <p class="tw-text-gray-800 dark:tw-text-gray-100 max-md:tw-text-sm">
-                                    Our AI receptionist operates 24/7, providing uninterrupted support so your business is always available—day or night.
-                                </p>
-
-
-
-                                <div class="tw-mt-auto tw-flex tw-gap-2 tw-underline tw-underline-offset-4">
-                                    <span>Learn more</span>
-                                    <i class="bi bi-arrow-up-right group-hover/card:tw--translate-y-1
-                                                group-hover/card:tw-translate-x-1 tw-duration-300 tw-transition-transform"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="reveal-up tw-h-[240px] tw-w-[450px] max-md:tw-w-full">
-                        <a href="#"
-                            class="tw-flex tw-w-full tw-h-full tw-gap-8 tw-rounded-xl hover:tw-shadow-lg tw-duration-300 
-                                tw-transition-all dark:tw-shadow-[#171717] tw-p-8 tw-group/card"
-                        >
-                            <div class="tw-text-4xl max-md:tw-text-2xl">
-                                <i class="bi bi-calendar-check"></i>
-                            </div>
-
-                            <div class="tw-flex tw-flex-col tw-gap-4">
-                                <h3 class="tw-text-2xl max-md:tw-text-xl">
-                                    Schedules Clients
-                                </h3>
-                                <p class="tw-text-gray-800 dark:tw-text-gray-100 max-md:tw-text-sm">
-                                    Seamlessly integrates with your business calendar to schedule client calls directly from the phone—no manual input required. Our AI receptionist handles bookings in real time, ensuring meetings are added without interruptions or back-and-forth.
-                                </p>
-
-
-                                <div class="tw-mt-auto tw-flex tw-gap-2 tw-underline tw-underline-offset-4">
-                                    <span>Learn more</span>
-                                    <i class="bi bi-arrow-up-right group-hover/card:tw--translate-y-1
-                                                group-hover/card:tw-translate-x-1 tw-duration-300 tw-transition-transform"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="reveal-up tw-h-[240px] tw-w-[450px] max-md:tw-w-full">
-                        <a href="#"
-                            class="tw-flex tw-w-full tw-h-full tw-gap-8 tw-rounded-xl
-                                 hover:tw-shadow-lg dark:tw-shadow-[#171717] tw-duration-300 tw-transition-all tw-p-8 tw-group/card"
-                        >
-                            <div class="tw-text-4xl max-md:tw-text-2xl">
-                                <i class="bi bi-telephone-inbound"></i>
-                            </div>
-
-                            <div class="tw-flex tw-flex-col tw-gap-4">
-                                <h3 class="tw-text-2xl max-md:tw-text-xl">
-                                    Handles Multiple Incoming Calls
-                                </h3>
-                                <p class="tw-text-gray-800 dark:tw-text-gray-100 max-md:tw-text-sm">
-                                    Handles multiple callers at once with zero wait time—prioritizing, routing, and responding in parallel so no call is missed during high-traffic periods.
-                                </p>
-
-                                <div class="tw-mt-auto tw-flex tw-gap-2 tw-underline tw-underline-offset-4">
-                                    <span>Learn more</span>
-                                    <i class="bi bi-arrow-up-right group-hover/card:tw--translate-y-1
-                                                group-hover/card:tw-translate-x-1 tw-duration-300 tw-transition-transform"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="reveal-up tw-h-[240px] tw-w-[450px] max-md:tw-w-full">
-                        <a href="#"
-                            class="tw-flex tw-w-full dark:tw-shadow-[#171717] tw-h-full tw-gap-8 tw-rounded-xl  hover:tw-shadow-lg tw-duration-300 
-                            tw-transition-all tw-p-8 tw-group/card"
-                        >
-                            <div class="tw-text-4xl max-md:tw-text-2xl">
-                                <i class="bi bi-sliders2-vertical"></i>
-                            </div>
-
-                            <div class="tw-flex tw-flex-col tw-gap-4">
-                                <h3 class="tw-text-2xl max-md:tw-text-xl">
-                                    Is Customizable
-                                </h3>
-                                <p class="tw-text-gray-800 dark:tw-text-gray-100 max-md:tw-text-sm">
-                                    Tailor exactly how your AI receptionist answers, routes, and responds — down to tone, keywords, hours, and escalation rules. Make it feel like a true extension of your brand, not a generic bot.
-                                </p>
-
-                                <div class="tw-mt-auto tw-flex tw-gap-2 tw-underline tw-underline-offset-4">
-                                    <span>Learn more</span>
-                                    <i class="bi bi-arrow-up-right group-hover/card:tw--translate-y-1
-                                                group-hover/card:tw-translate-x-1 tw-duration-300 tw-transition-transform"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="reveal-up tw-h-[240px] tw-w-[450px] max-md:tw-w-full">
-                        <a href="#"
-                            class="tw-flex tw-w-full tw-h-full tw-gap-8 tw-rounded-xl
-                                 hover:tw-shadow-lg dark:tw-shadow-[#171717] tw-duration-300 tw-transition-all tw-p-8 tw-group/card"
-                        >
-                            <div class="tw-text-4xl max-md:tw-text-2xl">
-                                <i class="bi bi-telephone-forward"></i>
-                            </div>
-
-                            <div class="tw-flex tw-flex-col tw-gap-4">
-                                <h3 class="tw-text-2xl max-md:tw-text-xl">
-                                    Transfers Calls
-                                </h3>
-                                <p class="tw-text-gray-800 dark:tw-text-gray-100 max-md:tw-text-sm">
-                                    Automatically routes incoming calls to the appropriate manager or team member, ensuring inquiries are handled efficiently without manual redirection.
-                                </p>
-
-                                <div class="tw-mt-auto tw-flex tw-gap-2 tw-underline tw-underline-offset-4">
-                                    <span>Learn more</span>
-                                    <i class="bi bi-arrow-up-right group-hover/card:tw--translate-y-1
-                                                group-hover/card:tw-translate-x-1 tw-duration-300 tw-transition-transform"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="reveal-up tw-h-[240px] tw-w-[450px] max-md:tw-w-full">
-                        <a href="#"
-                            class="tw-flex tw-w-full tw-h-full tw-gap-8 tw-rounded-xl dark:tw-shadow-[#171717] hover:tw-shadow-lg tw-duration-300 
-                                tw-transition-all tw-p-8 tw-group/card"
-                        >
-                            <div class="tw-text-4xl max-md:tw-text-2xl">
-                                <i class="bi bi-translate"></i>
-                            </div>
-
-                            <div class="tw-flex tw-flex-col tw-gap-4">
-                                <h3 class="tw-text-2xl max-md:tw-text-xl">
-                                    Speaks Multiple Languages
-                                </h3>
-                                <p class="tw-text-gray-800 dark:tw-text-gray-100 max-md:tw-text-sm">
-                                    Our AI receptionist can communicate with callers in over 100 languages, making your business more accessible and inclusive to a global or multilingual audience—no translator required.
-                                </p>
-
-
-                                <div class="tw-mt-auto tw-flex tw-gap-2 tw-underline tw-underline-offset-4">
-                                    <span>Learn more</span>
-                                    <i class="bi bi-arrow-up-right group-hover/card:tw--translate-y-1
-                                                group-hover/card:tw-translate-x-1 tw-duration-300 tw-transition-transform"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="reveal-up tw-h-[240px] tw-w-[450px] max-md:tw-w-full">
-                        <a href="#"
-                            class="tw-flex tw-w-full tw-h-full tw-gap-8 tw-rounded-xl 
-                                    hover:tw-shadow-lg dark:tw-shadow-[#171717] tw-duration-300 tw-transition-all tw-p-8 tw-group/card"
-                        >
-                            <div class="tw-text-4xl max-md:tw-text-2xl">
-                                <i class="bi bi-chat-left-text-fill"></i>
-                            </div>
-
-                            <div class="tw-flex tw-flex-col tw-gap-4">
-                                <h3 class="tw-text-2xl max-md:tw-text-xl">
-                                    Sends SMS Reminders
-                                </h3>
-                                <p class="tw-text-gray-800 dark:tw-text-gray-100 max-md:tw-text-sm">
-                                    Automatically sends friendly text reminders before each scheduled appointment—reducing no-shows and keeping clients informed without lifting a finger.
-                                </p>
-
-                                <div class="tw-mt-auto tw-flex tw-gap-2 tw-underline tw-underline-offset-4">
-                                    <span>Learn more</span>
-                                    <i class="bi bi-arrow-up-right group-hover/card:tw--translate-y-1
-                                                group-hover/card:tw-translate-x-1 tw-duration-300 tw-transition-transform"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-
-                
-            </div>
-        </section>
-
-
-        <!-- <section
-            class="tw-relative tw-flex  tw-w-full tw-min-h-[110vh] max-md:tw-min-h-[80vh] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden"
-        >   
-             <div class="tw-w-full max-lg:tw-max-w-full tw-place-content-center tw-items-center 
-                        tw-flex tw-flex-col tw-max-w-[80%] tw-gap-4 tw-p-4">
-               
-                <h3 class="reveal-up tw-text-5xl tw-font-medium max-md:tw-text-3xl tw-text-center tw-leading-normal">
-                    Additional Features
-                </h3> -->
-                <!-- <p class="reveal-up tw-mt-3 tw-max-w-[600px] tw-text-center ">
-                </p> -->
-                
-                <!-- <div class="tw-mt-8 tw-relative tw-gap-10 tw-p-4 tw-grid tw-place-items-center tw-grid-cols-3 max-lg:tw-flex max-lg:tw-flex-col">
-
-
-                    <div class="reveal-up  tw-w-[350px] tw-border-[1px] tw-h-[400px] tw-rounded-md tw-place-items-center tw-p-4
-                                 tw-bg-[#f2f3f4] max-md:tw-w-[320px] dark:tw-bg-[#141414] dark:tw-border-[#1f2123] tw-flex tw-flex-col tw-gap-3">
-
-                        <div class="tw-w-full tw-h-[250px]
-                                    tw-p-4
-                                    tw-rounded-xl 
-                                     tw-backdrop-blur-2xl
-                                     tw-overflow-hidden tw-flex tw-place-content-center">
-                            <img src="./assets/images/home/prompts2.png" 
-                                    alt="Prompt library" class="tw-w-auto tw-h-full tw-object-contain">
-                        </div>
-                        <h3 class="tw-text-2xl">
-                            Prompt Library
-                        </h3>
-                        <p class="tw-text-gray-700 dark:tw-text-gray-300 tw-px-4 tw-text-center tw-text-sm">
-                            Forget about writing your own prompt, use the prompt templates and supercharge your
-                            workflow.
-                        </p>
-                    </div>
-                    
-                    <div class="reveal-up tw-w-[350px] max-md:tw-w-[320px] tw-border-[1px] tw-h-[400px] tw-rounded-md tw-place-items-center tw-p-4
-                                 tw-bg-[#f2f3f4] dark:tw-bg-[#141414] dark:tw-border-[#1f2123] tw-flex tw-flex-col tw-gap-3">
-
-                        <div class="tw-w-full tw-h-[250px]
-                                    tw-p-4
-                                    tw-rounded-xl 
-                                     tw-backdrop-blur-2xl
-                                     tw-overflow-hidden tw-flex tw-place-content-center">
-                            <img src="./assets/images/home/search.png" 
-                                    alt="Web search" class="tw-w-auto tw-h-full tw-object-contain">
-                        </div>
-                        <h3 class="tw-text-2xl">
-                            Real-time web search
-                        </h3>
-                        <p class="tw-text-gray-700 dark:tw-text-gray-300 tw-px-4 tw-text-center tw-text-sm">
-                            Our Real-time web search AI Bot provides instant, live search results directly within the AI chat playground.
-                        </p>
-                    </div>
-
-                    <div class="reveal-up tw-w-[350px] max-md:tw-w-[320px] tw-border-[1px] tw-h-[400px] tw-rounded-lg tw-place-items-center tw-p-4
-                                 tw-bg-[#f2f3f4] dark:tw-bg-[#141414] dark:tw-border-[#1f2123] tw-flex tw-flex-col tw-gap-3">
-
-                        <div class="tw-w-full tw-h-[250px]
-                                    tw-p-4
-                                    tw-rounded-xl 
-                                     tw-backdrop-blur-2xl
-                                     tw-overflow-hidden tw-flex tw-place-content-center">
-                            <img src="./assets/images/home/image.png" 
-                                    alt="Image generation" class="tw-w-auto tw-h-full tw-object-contain">
-                        </div>
-                        <h3 class="tw-text-2xl">
-                            Image Generation
-                        </h3>
-                        <p class="tw-text-gray-700 dark:tw-text-gray-300 tw-px-4 tw-text-center tw-text-sm">
-                            Generate Image instantly from multiple models, create visuals from text descriptions or templates.
-                        </p>
-                    </div>
-
-                    <div class="reveal-up tw-w-[350px] max-md:tw-w-[320px] tw-border-[1px] tw-h-[400px] tw-rounded-lg tw-place-items-center tw-p-4
-                                 tw-bg-[#f2f3f4] dark:tw-bg-[#141414] dark:tw-border-[#1f2123] tw-flex tw-flex-col tw-gap-3">
-
-                        <div class="tw-w-full tw-h-[250px]
-                                    tw-p-4
-                                     tw-rounded-xl 
-                                     tw-backdrop-blur-2xl
-                                     tw-overflow-hidden tw-flex tw-place-content-center">
-                            <img src="./assets/images/home/history.png" 
-                                    alt="History" class="tw-w-auto tw-h-full tw-object-contain">
-                        </div>
-                        <h3 class="tw-text-2xl">
-                            History
-                        </h3>
-                        <p class="tw-text-gray-700 dark:tw-text-gray-300 tw-px-4 tw-text-center tw-text-sm">
-                            All of the models can recall previous topic, so you 
-                            can continue your conversation at any point of time. 
-                        </p>
-                    </div>
-
-                    <div class="reveal-up tw-w-[350px] max-md:tw-w-[320px] tw-border-[1px] tw-h-[400px] tw-rounded-lg tw-place-items-center tw-p-4
-                                 tw-bg-[#f2f3f4] dark:tw-bg-[#141414] dark:tw-border-[#1f2123] tw-flex tw-flex-col tw-gap-3">
-
-                        <div class="tw-w-full tw-h-[250px]
-                                    tw-p-4
-                                    tw-rounded-xl 
-                                     tw-backdrop-blur-2xl
-                                     tw-overflow-hidden tw-flex tw-place-content-center">
-                            <img src="./assets/images/home/import.png" 
-                                    alt="Import content" class="tw-w-auto tw-h-full tw-object-contain">
-                        </div>
-                        <h3 class="tw-text-2xl">
-                            Import content
-                        </h3>
-                        <p class="tw-text-gray-700 dark:tw-text-gray-300 tw-px-4 tw-text-center tw-text-sm">
-                            Effortlessly import PDFs, images, and documents. Use AI to ask questions, extract information, and summarize documents.
-                        </p>
-                    </div>
-
-                    <div class="reveal-up tw-w-[350px] max-md:tw-w-[320px] tw-border-[1px] tw-h-[400px] tw-rounded-lg tw-place-items-center tw-p-4
-                                 tw-bg-[#f2f3f4] dark:tw-bg-[#141414] dark:tw-border-[#1f2123] tw-flex tw-flex-col tw-gap-3">
-
-                        <div class="tw-w-full tw-h-[250px]
-                                    tw-p-4
-                                    tw-rounded-xl 
-                                     tw-backdrop-blur-2xl
-                                     tw-overflow-hidden tw-flex tw-place-content-center">
-                            <img src="./assets/images/home/multilingual.png" 
-                                    alt="Multilingual" class="tw-w-auto tw-h-full tw-object-contain">
-                        </div>
-                        <h3 class="tw-text-2xl">
-                            Multilingual support
-                        </h3>
-                        <p class="tw-text-gray-700 dark:tw-text-gray-300 tw-px-4 tw-text-center tw-text-sm">
-                            ChatGPT, and Gemini can understand and respond in over 100 languages.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-        </section> -->
-
-        <!-- <section
-            class="tw-relative tw-flex  tw-w-full tw-min-h-[100vh] max-md:tw-min-h-[80vh] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden"
-        >   
-            <div class="tw-w-full max-lg:tw-max-w-full tw-place-content-center tw-place-items-center 
-                        tw-flex tw-flex-col tw-max-w-[80%] tw-gap-4 tw-p-4">
-               
-                <h3 class="reveal-up tw-text-5xl tw-font-medium max-md:tw-text-3xl tw-text-center tw-leading-normal">
-                    One Subscription for it all
-                </h3>
-                <p class="reveal-up tw-mt-3 tw-max-w-[600px] tw-text-center ">
-                    Why pay for multiple expensive subscriptions when one subscription can do it all?
-                    Access multiple AI models and save 1000's of dollar per year. 
-                </p>
-                
-                <div class="tw-mt-8 tw-relative tw-flex max-lg:tw-flex-col tw-gap-5">
-
-                    <div
-                        class="reveal-up tw-flex tw-w-full tw-max-w-[650px] max-md:tw-max-w-full tw-flex-col tw-place-items-center tw-gap-2 tw-rounded-lg tw-border-[1px]
-                            tw-border-outlineColor tw-bg-white dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-2 tw-shadow-xl max-lg:tw-w-[320px]"
-                            >
-                        <img src="./assets/images/home/multi-sub.png" 
-                            alt="Multi sub">
-                    </div>
-
-                     <div
-                        class="reveal-up tw-flex tw-w-full tw-max-w-[650px] tw-flex-col tw-place-items-center tw-gap-2 tw-rounded-lg tw-border-[1px]
-                            tw-border-outlineColor tw-bg-white dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-2 tw-shadow-xl max-lg:tw-w-[320px]"
-                            >
-                        <img src="./assets/images/home/single-sub.jpg" 
-                            alt="Single sub">
-                    </div>
-
-                </div>
-
-                <a href="#" class="reveal-up tw-group tw-shadow-xl btn tw-flex tw-gap-2 tw-mt-10">
-                    <span>Start Chat</span>
-                    <i class="bi bi-arrow-right tw-duration-300 group-hover:tw-translate-x-1"></i>
-                </a>
-
-            </div>
-        </section> -->
-
-        <!-- <section
-            class="tw-flex tw-min-h-[100vh] tw-w-full tw-flex-col tw-place-content-center tw-place-items-center tw-p-[2%]"
-        >
-            <h3
-                class="reveal-up tw-text-4xl tw-font-medium tw-text-center max-md:tw-text-2xl"
-            >
-                Join the professionals using Pixa
-            </h3> -->
-            <!-- Testimonials -->
-            <!-- <div
-                class="tw-mt-20 tw-gap-10 tw-space-y-8  max-md:tw-columns-1 lg:tw-columns-2 xl:tw-columns-3"
-            >
-                <div
-                    class="reveal-up tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid 
-                        tw-flex-col tw-gap-4 tw-rounded-lg tw-border-[1px] 
-                        tw-bg-[#f6f7fb] dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-4 max-lg:tw-w-[320px]"
-                >   
-
-                    <div class="tw-flex tw-place-items-center tw-gap-3">
-                        <div
-                            class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full"
-                        >
-                            <img
-                                src="./assets/images/people/man2.jpg"
-                                class="tw-h-full tw-w-full tw-object-cover"
-                                alt="man"
-                            />
-                        </div>
-                        <div class="tw-flex tw-flex-col tw-gap-1">
-                            <div class="tw-font-semibold">Mante</div>
-                            <div class="tw-text-gray-700 dark:tw-text-gray-300">Glu, cto</div>
-                        </div>
-                    </div>
-
-                    <p class="tw-mt-4 tw-text-gray-800 dark:tw-text-gray-200">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Beatae, vero. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolore deleniti iusto Numquam!
-                    </p>
-                </div>
-
-                 <div
-                    class="reveal-up tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid 
-                        tw-flex-col tw-gap-4 tw-rounded-lg tw-border-[1px] 
-                        tw-bg-[#f6f7fb] dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-4 max-lg:tw-w-[320px]"
-                >   
-
-                    <div class="tw-flex tw-place-items-center tw-gap-3">
-                        <div
-                            class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full"
-                        >
-                            <img
-                                src="./assets/images/people/women.jpg"
-                                class="tw-h-full tw-w-full tw-object-cover"
-                                alt="women"
-                            />
-                        </div>
-                        <div class="tw-flex tw-flex-col tw-gap-1">
-                            <div class="tw-font-semibold">Trich B</div>
-                            <div class="tw-text-gray-700 dark:tw-text-gray-300">AMI, ceo</div>
-                        </div>
-                    </div>
-
-                    <p class="tw-mt-4 tw-text-gray-800 dark:tw-text-gray-200">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Beatae, vero. Lorem ipsum dolor sit amet.
-                    </p>
-                </div>
-
-                 <div
-                    class="reveal-up tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid 
-                        tw-flex-col tw-gap-4 tw-rounded-lg tw-border-[1px] 
-                        tw-bg-[#f6f7fb] dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-4 max-lg:tw-w-[320px]"
-                >   
-
-                    <div class="tw-flex tw-place-items-center tw-gap-3">
-                        <div
-                            class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full"
-                        >
-                            <img
-                                src="./assets/images/people/man.jpg"
-                                class="tw-h-full tw-w-full tw-object-cover"
-                                alt="man"
-                            />
-                        </div>
-                        <div class="tw-flex tw-flex-col tw-gap-1">
-                            <div class="tw-font-semibold">John B</div>
-                            <div class="tw-text-gray-700 dark:tw-text-gray-300">Benz, ceo</div>
-                        </div>
-                    </div>
-
-                    <p class="tw-mt-4 tw-text-gray-800 dark:tw-text-gray-200">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, expedita nihil repellendus accusamus itaque facere labore, suscipit tempore in harum repellat. Doloribus, dolor facere dolorem impedit facilis rerum beatae exercitationem aliquid porro ea architecto similique illo omnis odio consequatur modi.
-                    </p>
-                </div>
-
-                 <div
-                    class="reveal-up tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid 
-                        tw-flex-col tw-gap-4 tw-rounded-lg tw-border-[1px] 
-                        tw-bg-[#f6f7fb] dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-4 max-lg:tw-w-[320px]"
-                >   
-
-                    <div class="tw-flex tw-place-items-center tw-gap-3">
-                        <div
-                            class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full"
-                        >
-                            <img
-                                src="./assets/images/people/man2.jpg"
-                                class="tw-h-full tw-w-full tw-object-cover"
-                                alt="man"
-                            />
-                        </div>
-                        <div class="tw-flex tw-flex-col tw-gap-1">
-                            <div class="tw-font-semibold">Ben Alfert B</div>
-                            <div class="tw-text-gray-700 dark:tw-text-gray-300">XZ tech, cto</div>
-                        </div>
-                    </div>
-
-                    <p class="tw-mt-4 tw-text-gray-800 dark:tw-text-gray-200">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Beatae, vero.
-                    </p>
-                </div>
-
-                 <div
-                    class="reveal-up tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid 
-                        tw-flex-col tw-gap-4 tw-rounded-lg tw-border-[1px] 
-                        tw-bg-[#f6f7fb] dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-4 max-lg:tw-w-[320px]"
-                >   
-
-                    <div class="tw-flex tw-place-items-center tw-gap-3">
-                        <div
-                            class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full"
-                        >
-                            <img
-                                src="./assets/images/people/women.jpg"
-                                class="tw-h-full tw-w-full tw-object-cover"
-                                alt="women"
-                            />
-                        </div>
-                        <div class="tw-flex tw-flex-col tw-gap-1">
-                            <div class="tw-font-semibold">Rachel</div>
-                            <div class="tw-text-gray-700 dark:tw-text-gray-300">Gem, cto</div>
-                        </div>
-                    </div>
-
-                    <p class="tw-mt-4 tw-text-gray-800 dark:tw-text-gray-200">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Beatae, vero. Lorem, ipsum dolor.
-                    </p>
-                </div>
-
-                 <div
-                    class="reveal-up tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid 
-                        tw-flex-col tw-gap-4 tw-rounded-lg tw-border-[1px] 
-                        tw-bg-[#f6f7fb] dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-4 max-lg:tw-w-[320px]"
-                >   
-
-                    <div class="tw-flex tw-place-items-center tw-gap-3">
-                        <div
-                            class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full"
-                        >
-                            <img
-                                src="./assets/images/people/man.jpg"
-                                class="tw-h-full tw-w-full tw-object-cover"
-                                alt="man"
-                            />
-                        </div>
-                        <div class="tw-flex tw-flex-col tw-gap-1">
-                            <div class="tw-font-semibold">Jamie</div>
-                            <div class="tw-text-gray-700 dark:tw-text-gray-300">SnapFist.ai, ceo</div>
-                        </div>
-                    </div>
-
-                    <p class="tw-mt-4 tw-text-gray-800 dark:tw-text-gray-200">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, nihil vitae fuga ab reiciendis optio et corporis dolorem alias deserunt, molestias in iusto! Ratione, quisquam incidunt. Reprehenderit ipsam officiis enim.
-                    </p>
-                </div>
-               
-            </div>
-        </section> -->
-
-
-        <section
-            class="tw-mt-5 tw-flex tw-w-full tw-flex-col tw-gap-6 tw-place-items-center tw-p-[2%]"
-            id="pricing"
-        >
-            <h3
-                class="reveal-up tw-text-5xl tw-font-medium max-md:tw-text-2xl"
-            >
-                Choose the right plan for you
-            </h3>
-            <!-- pricing -->
-            <div
-                class="tw-mt-10 tw-flex tw-flex-wrap tw-place-content-center tw-gap-8 max-lg:tw-flex-col"
-            >
-                <div
-                    class="reveal-up tw-flex tw-w-[350px] tw-flex-col tw-place-items-center tw-gap-2 tw-rounded-lg tw-border-[1px]
-                            tw-border-outlineColor tw-bg-white dark:tw-bg-[#080808] dark:tw-border-[#1f2123] tw-p-8 tw-shadow-xl max-lg:tw-w-[320px]"
-                >
-                    <h3 class="">
-                        <span class="tw-text-5xl max-md:tw-text-3xl tw-font-semibold">$999</span>
-                        <span class="tw-text-2xl tw-text-gray-600 dark:tw-text-gray-300">/mo</span>
-                    </h3>
-                    <p class="tw-mt-3 tw-text-center tw-text-gray-800 dark:tw-text-gray-100">
-                       12 month plan
-                    </p>
-                    <hr />
-                    <ul
-                        class="tw-mt-4 tw-flex tw-flex-col tw-gap-4 tw-text-base tw-text-gray-800 dark:tw-text-gray-200"
-                    >
-                        <li class="tw-flex tw-gap-2">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>No Setup Fee</span>    
-                        </li>
-                        <li class="tw-flex tw-gap-2">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>Unlimited Calls</span>    
-                        </li>
-                        <li class="tw-flex tw-gap-2">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>Around Clock Service</span>    
-                        </li>
-
-                        <li class="tw-flex tw-gap-2 ">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>Automated SMS Reminders</span>    
-                        </li>
-
-                        <li class="tw-flex tw-gap-2 ">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>AI Appointment Scheduling</span>    
-                        </li>
-                  
-                    </ul>
-                    
-                </div>
-                
-                <div
-                    class="reveal-up tw-flex tw-w-[350px] tw-flex-col tw-place-items-center tw-gap-2 tw-rounded-lg tw-border-2
-                            tw-border-outlineColor tw-bg-white dark:tw-bg-[#080808] dark:tw-border-[#595858] tw-p-8 tw-shadow-xl max-lg:tw-w-[320px]"
-                >
-                    <h3 class="">
-                        <span class="tw-text-5xl max-md:tw-text-3xl  tw-font-semibold">$5,000 + <br>$500</span>
-                        <span class="tw-text-2xl max-md:tw-text-xl  tw-text-gray-600 dark:tw-text-gray-300">/mo</span>
-                    </h3>
-                    <p class="tw-mt-3 tw-text-center tw-text-gray-800 dark:tw-text-gray-200">
-                        12 month plan
-                    </p>
-                    <hr />
-                    <ul
-                        class="tw-mt-4 tw-flex tw-flex-col tw-gap-4  tw-text-base tw-text-gray-800 dark:tw-text-gray-100"
-                    >
-                        <li class="tw-flex tw-gap-2">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>One Time Setup Fee</span>    
-                        </li>
-                        <li class="tw-flex tw-gap-2">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>Unlimited Calls</span>    
-                        </li>
-                        <li class="tw-flex tw-gap-2">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>Around Clock Service</span>    
-                        </li>
-
-                        <li class="tw-flex tw-gap-2 ">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>Automated SMS Reminders</span>    
-                        </li>
-
-                        <li class="tw-flex tw-gap-2 ">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>AI Appointment Scheduling</span>    
-                        </li>
-                  
-                    </ul>
-                   
-                </div>
-
-            </div>
-        </section>
-<!-- ROI Calculator Section -->
-<section class="tw-mt-20 tw-w-full tw-flex tw-flex-col tw-items-center tw-gap-6 tw-p-[5%]">
-  <h3 class="reveal-up tw-text-4xl tw-font-medium max-md:tw-text-2xl tw-text-center">
-    Calculate Your ROI
-  </h3>
-  <p class="tw-text-gray-700 dark:tw-text-gray-300 tw-text-center tw-max-w-[600px]">
-    See how much revenue you could recover by never missing another call.
-  </p>
-
-<div
-  id="roi-calculator"
-  style="width: 60vw; opacity: 0; transform: translateY(100px) rotateX(40deg); transform-origin: top; filter: blur(1px);"
-  class="reveal-up tw-bg-transparent dark:tw-bg-[#0e0e0e] tw-rounded-xl tw-shadow-xl tw-p-8 tw-flex tw-flex-col tw-justify-center tw-items-center tw-border tw-border-white tw-max-w-[700px] tw-mx-auto"
->
-
-  <div class="tw-flex tw-flex-col tw-gap-4 tw-w-full">
-    <div class="tw-flex tw-flex-col">
-      <label class="tw-mb-1 tw-text-sm">Missed Calls Per Month</label>
-      <input id="missedCalls" type="number" placeholder="e.g. 50"
-        class="input tw-bg-transparent tw-text-black dark:tw-text-white" />
-    </div>
-    <div class="tw-flex tw-flex-col">
-      <label class="tw-mb-1 tw-text-sm">Average Value Per Client ($)</label>
-      <input id="valuePerClient" type="number" placeholder="e.g. 200"
-        class="input tw-bg-transparent tw-text-black dark:tw-text-white" />
-    </div>
-    <div class="tw-flex tw-flex-col">
-      <label class="tw-mb-1 tw-text-sm">Conversion Rate (%)</label>
-      <input id="conversionRate" type="number" placeholder="e.g. 25"
-        class="input tw-bg-transparent tw-text-black dark:tw-text-white" />
-    </div>
-    <button onclick="calculateROI()" class="btn tw-w-full tw-rounded-md tw-mt-4">
-      Calculate ROI
-    </button>
-  </div>
-
-  <div id="roiResult"
-    class="tw-mt-6 tw-text-xl tw-font-medium tw-text-center tw-text-gray-800 dark:tw-text-gray-200">
-    <!-- ROI will display here -->
-  </div>
-</div>
-
-
-
-
   </div>
 </section>
 
-<script>
-  function calculateROI() {
-    const missedCalls = parseInt(document.getElementById('missedCalls').value);
-    const valuePerClient = parseFloat(document.getElementById('valuePerClient').value);
-    const conversionRate = parseFloat(document.getElementById('conversionRate').value);
-
-    if (isNaN(missedCalls) || isNaN(valuePerClient) || isNaN(conversionRate)) {
-      document.getElementById('roiResult').innerText = "Please fill out all fields correctly.";
-      return;
-    }
-
-    const potentialClients = missedCalls * (conversionRate / 100);
-    const recoveredRevenue = potentialClients * valuePerClient;
-    document.getElementById('roiResult').innerText = `Your estimated monthly ROI: $${recoveredRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 
+<section id="roi-pricing" class="roi-section">
+  <!-- Updated Main Title -->
+  <h2 class="section-title">Plans</h2>
+
+  <!-- Pricing Tiers First -->
+  <div class="pricing-tiers-cards">
+    <div class="plans-card-row">
+      <div class="plan-card">
+        <h4>Tier 1</h4>
+        <p class="price-big">$999<span>/month</span></p>
+        <ul>
+          <li>No setup fee</li>
+          <li>Full feature access</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <h4>Tier 2</h4>
+        <p class="price-big">
+          $5,000<span class="setup"> setup</span> + $500<span>/month</span>
+        </p>
+        <ul>
+          <li>One-time onboarding</li>
+          <li>Dedicated agent customization</li>
+          <li>Lower monthly rate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Updated Subheading -->
+  <h3 class="section-subtitle" style="margin-top: 5rem; padding-bottom: 2rem;">Estimate Your ROI</h3>
+
+  <!-- ROI Calculator Second -->
+  <div class="roi-calculator">
+    <div class="roi-inputs">
+      <label>
+        Missed Calls Per Month:
+        <input type="number" id="missedCalls" placeholder="e.g. 80" />
+      </label>
+      <label>
+        Avg Value Per Call ($):
+        <input type="number" id="callValue" placeholder="e.g. 100" />
+      </label>
+      <label>
+        Avg Close Rate (%):
+        <input type="number" id="closeRate" placeholder="e.g. 30" />
+      </label>
+      <button onclick="calculateROI()">Calculate ROI</button>
+    </div>
+
+    <div class="roi-result" id="roiResult">
+      Enter values above to estimate monthly ROI.
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+
+  .try-section.simplified-try {
+  background: black;
+  color: white;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.try-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+  width: 100%;
+  align-items: flex-start;  /* ✅ was center */
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 0 2rem;
+}
+
+.try-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.try-text h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.try-text p {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.call-demo-button {
+  display: inline-block;
+  background: #4C8ED9;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.call-demo-button:hover {
+  background: #3C7FCB;
+}
+
+.try-phone {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .try-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
   }
-</script>
 
-<script>
-  gsap.registerPlugin(ScrollTrigger);
+  .try-text,
+  .try-phone {
+    width: 100%;
+    text-align: center;
+  }
 
-  gsap.to("#roi-calculator", {
-    scrollTrigger: {
-      trigger: "#roi-calculator",
-      start: "top 80%",
-      toggleActions: "play none none none",
-    },
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    filter: "blur(0px)",
-    boxShadow: "0 20px 50px rgba(255, 255, 255, 0.1)", 
-    duration: 1.3,
-    ease: "power3.out",
-  });
-</script>
+.try-text h2 {
+  font-size: 3.2rem;
+  margin-bottom: 1.2rem;
+  color: white; /* Was #4C8ED9, now plain white */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.try-text p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  max-width: 540px;
+}
+}
 
 
+  .pricing-tiers-cards {
+  margin-top: 5rem;
+  text-align: center;
+}
 
-<section
-  style="padding-top: 6rem; padding-bottom: 6rem;"
-  class="tw-relative tw-flex tw-w-full tw-flex-col tw-items-center tw-p-[5%] tw-px-[10%]"
->
-  <h3 class="tw-text-4xl tw-font-medium max-md:tw-text-2xl">FAQ</h3>
+.plans-heading {
+  font-size: 2.4rem;
+  margin-bottom: 3rem;
+  color: white;
+}
 
-  <div class="tw-mt-5 tw-w-full tw-max-w-[850px] tw-flex tw-flex-col">
-    <!-- FAQ ITEM -->
-    <div style="padding-bottom: 1.5rem; border-bottom: 1px solid white;">
-      <button class="tw-flex tw-w-full tw-justify-between tw-items-center tw-text-left tw-text-xl max-md:tw-text-lg faq-toggle">
-        <span>What is Nyvori?</span>
-        <i class="bi bi-plus tw-text-xl tw-transition-transform"></i>
-      </button>
-      <div class="faq-answer tw-mt-2 tw-text-base tw-text-gray-300" style="display: none; font-style: italic;">
-        Nyvori is a software company that helps local businesses automate customer communication and operations. We integrate modern tools like smart calling, scheduling, and reminders to reduce overhead and increase revenue. Our platform makes it easy for businesses to stay competitive as technology evolves.
+.plans-card-row {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 90vw; /* NEW: let it grow wider */
+  margin: 0 auto;   /* Center it */
+}
 
-      </div>
+.plan-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  flex: 1 1 300px;
+  max-width: 400px;
+  min-width: 260px;
+  min-height: 520px;
+  box-shadow: 0 0 24px rgba(76, 142, 217, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Changed from space-between */
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  flex-grow: 1;
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.plan-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 40px rgba(76, 142, 217, 0.3);
+}
+
+.plan-card h4 {
+  font-size: 1.6rem;
+  color: #4C8ED9;
+  margin-bottom: 1.5rem;
+}
+
+.price-big {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.price-big span {
+  font-size: 1rem;
+  color: #aaa;
+  font-weight: normal;
+  margin-left: 0.3rem;
+}
+
+.price-big .setup {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #aaa;
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  color: #ccc;
+  font-size: 0.95rem;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.plan-card ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.plan-card ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #4C8ED9;
+  font-size: 0.9rem;
+}
+
+  .roi-section {
+  background: #0a0a0a;
+  color: white;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.roi-section .section-title {
+  font-size: 2.8rem;
+  color: white;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+.roi-calculator {
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  background: #1a1a1a;
+  
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 0 25px rgba(76, 142, 217, 0.1);
+}
+
+.roi-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.roi-inputs label {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  color: #ccc;
+  text-align: left;
+}
+
+.roi-inputs input {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.roi-inputs button {
+  margin-top: 1rem;
+  background: #4C8ED9;
+  color: white;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.roi-inputs button:hover {
+  background: #3C7FCB;
+}
+
+.roi-result {
+  font-size: 1.2rem;
+  color: #8fd4ff;
+  font-weight: 500;
+}
+
+.pricing-tiers {
+  margin-top: 4rem;
+}
+
+.pricing-tiers h3 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.tier {
+  margin-bottom: 2rem;
+}
+
+.tier h4 {
+  font-size: 1.4rem;
+  color: #4C8ED9;
+  margin-bottom: 0.5rem;
+}
+
+.tier .price {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.tier .price span {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+</style>
+
+<section id="about" class="about-section">
+  <div class="about-inner">
+    <div class="about-text">
+      <h2>About Nyvori</h2>
+      <p>Nyvori builds intelligent AI receptionists designed specifically for modern businesses. Our virtual agents handle inbound calls, schedule appointments, qualify leads, and provide real-time responses—so you never miss a customer or an opportunity.</p>
+
+<p>By combining powerful automation with natural-sounding conversation, Nyvori delivers a professional, always-on front desk experience that boosts efficiency, reduces overhead, and leaves a lasting impression on every caller.</p>
+
+
     </div>
+<div class="about-image effect-stack">
+    
+  <div class="img-layer" style="--i:0"></div>
+  <div class="img-layer" style="--i:1"></div>
+  <div class="img-layer" style="--i:2"></div>
+  <div class="img-layer" style="--i:3"></div>
+  <div class="img-layer" style="--i:4"></div>
 
-    <!-- FAQ ITEM -->
-    <div style="padding-bottom: 1.5rem; border-bottom: 1px solid white;">
-      <button class="tw-flex tw-w-full tw-justify-between tw-items-center tw-text-left tw-text-xl max-md:tw-text-lg faq-toggle">
-        <span style="padding-top: 5%;">How long does it take to get started?</span>
-        <i class="bi bi-plus tw-text-xl tw-transition-transform"></i>
-      </button>
-      <div class="faq-answer tw-mt-2 tw-text-base tw-text-gray-300" style="display: none; font-style: italic;">
-        Most businesses are up and running with Nyvori in 5–7 days. We handle the setup and integration, so you don’t need any technical experience to get started.
-      </div>
-    </div>
-
-    <!-- FAQ ITEM -->
-    <div style="padding-bottom: 1.5rem; border-bottom: 1px solid white;">
-      <button class="tw-flex tw-w-full tw-justify-between tw-items-center tw-text-left tw-text-xl max-md:tw-text-lg faq-toggle">
-        <span style="padding-top: 5%;">Do I need to change my existing phone system?</span>
-        <i class="bi bi-plus tw-text-xl tw-transition-transform"></i>
-      </button>
-      <div class="faq-answer tw-mt-2 tw-text-base tw-text-gray-300" style="display: none; font-style: italic;">
-        Not at all. Nyvori works with your current setup and forwards calls seamlessly—no need to replace your business number or install new hardware.
-      </div>
-    </div>
-
-    <!-- FAQ ITEM -->
-    <div style="padding-bottom: 1.5rem; border-bottom: 1px solid white;">
-      <button class="tw-flex tw-w-full tw-justify-between tw-items-center tw-text-left tw-text-xl max-md:tw-text-lg faq-toggle">
-        <span style="padding-top: 5%;">Can I customize how the system speaks and responds?</span>
-        <i class="bi bi-plus tw-text-xl tw-transition-transform"></i>
-      </button>
-      <div class="faq-answer tw-mt-2 tw-text-base tw-text-gray-300" style="display: none; font-style: italic;">
-        Yes. You can tailor responses, greetings, and escalation rules to fit your brand's voice—whether formal, casual, or anything in between.
-      </div>
-    </div>
-
-    <!-- FAQ ITEM -->
-    <div style="padding-bottom: 1.5rem; border-bottom: 1px solid white;">
-    <button class="tw-flex tw-w-full tw-justify-between tw-items-center tw-text-left tw-text-xl max-md:tw-text-lg faq-toggle">
-        <span style="padding-top: 5%;">What happens if a customer needs to speak to a real person?</span>
-        <i class="bi bi-plus tw-text-xl tw-transition-transform"></i>
-    </button>
-    <div class="faq-answer tw-mt-2 tw-text-base tw-text-gray-300" style="display: none; font-style: italic;">
-        If a call requires human attention, Nyvori will automatically forward it to the right team member or notify you via SMS or email—so you can follow up or schedule a call at your earliest convenience.
-  </div>
-</div>
-
+  <!-- fallback image for small screens -->
   </div>
 </section>
+<section id="contact" class="contact-section">
+  <h2 class="section-glow">Contact Us</h2>
+
+  <div style="margin-top: 2rem; text-align: center; font-size: 1.2rem; color: #ccc;">
+    <p>Email us anytime:</p>
+<p style="font-size: 1.4rem; color: #fff; font-weight: 600;">
+  <a href="mailto:contact@nyvori.ai" style="color: #fff; text-decoration: none;">
+    info@nyvori.com
+  </a>
+</p>
+    <div style="margin: 2rem 0;"></div>
+
+    <p>Give us a call:</p>
+    <p style="font-size: 1.4rem; color: #fff; font-weight: 600;">(555) 123-4567</p>
+  </div>
+
+  <!-- Button -->
+  <div style="margin-top: 3rem;">
+    <a href="https://calendly.com/nyvori-co/30min?back=1" target="_blank" rel="noopener" class="schedule-meeting-button">
+      Book A Meeting
+    </a>
+  </div>
+</section>
+
+
+
+<!-- PHONE STYLE SECTION -->
+<style>
+
+  
+
+  .software-highlight-section.simplified {
+  background: #0a0a0a;
+  padding: 6rem 2rem;
+  color: white;
+  text-align: center;
+}
+
+.software-feature-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.feature-block h3 {
+  font-size: 1.4rem;
+  color: #4C8ED9;
+  margin-bottom: 0.5rem;
+}
+
+.feature-block p {
+  font-size: 1rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Stack on mobile */
+@media (max-width: 768px) {
+  .software-feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.about-bottom-image-mobile {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .about-bottom-image-mobile {
+    display: block;
+    margin-top: 2.5rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .about-bottom-image-mobile img {
+    width: 80%;
+    max-width: 320px;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
+  }
+}
+
+@keyframes glowText {
+  0% { text-shadow: 0 0 10px rgba(76, 142, 217, 0.3); }
+  100% { text-shadow: 0 0 20px rgba(111, 168, 220, 0.6); }
+}
+
+
+  .schedule-meeting-button {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.8rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: transparent;
+  border: 2px solid #4C8ED9;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animated background */
+.schedule-meeting-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    #000000 0%,
+    #3C7FCB 20%,
+    #000000 40%,
+    #3C7FCB 60%,
+    #000000 80%
+  );
+  background-size: 200% auto;
+  animation: slide-purple 4s linear infinite;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.schedule-meeting-button:hover {
+  color: #000;
+  background: #4C8ED9;
+  box-shadow: 0 0 12px rgba(179, 136, 255, 0.4), 0 0 24px rgba(179, 136, 255, 0.2);
+}
+
+.schedule-meeting-button a {
+  text-decoration: none;
+}
+
+@keyframes slide-purple {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+  .carousel-mode {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1); /* Smoother easing */
+  will-change: transform;
+}
+
+
+.carousel-arrow {
+  background: none;
+  border: none;
+  color: #4C8ED9;
+  font-size: 2.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.carousel-arrow.left {
+  left: -2rem; /* adjust as needed */
+}
+
+.carousel-arrow.right {
+  right: -2rem;
+}
+
+.carousel-arrow:hover {
+  color: white;
+}
+
+
+  .voicewave-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('assets/voicewave.gif') center/cover no-repeat;
+  opacity: 0.15;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 1024px) {
+  .phone-image {
+    width: 240px;
+    height: 500px;
+  }
+}
+
+.try-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top instead of center */
+  padding: 6rem 2rem 4rem;
+  flex-wrap: wrap;
+  overflow: visible; /* ✅ allow full phone visibility */
+  min-height: 200vh;
+}
+
+.phone-bubble-orbit-grid {
+    margin-top: 4vh;
+
+  max-height: 90vh;
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-areas:
+    "top-left    phone     top-right"
+    "left        phone     right"
+    ".           bottom    .";
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  justify-items: center;
+  gap: 2rem;
+  transform: scale(0.95); /* Slight shrink to ensure it fits */
+}
+
+/* Place bubbles in grid cells */
+.bubble-top-left    { grid-area: top-left; }
+.bubble-top-right   { grid-area: top-right; }
+.bubble-left        { grid-area: left; }
+.bubble-right       { grid-area: right; }
+.bubble-bottom      { grid-area: bottom; }
+.floating-phone     { grid-area: phone; }
+
+/* Keep existing styles */
+.floating-phone {
+  border-radius: 40px;
+  padding: 1.5rem;
+  position: relative;
+  width: clamp(180px, 24vw, 320px);
+  height: clamp(350px, 48vw, 600px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: phoneFloat 3.5s ease-in-out infinite;
+}
+
+.phone-image {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.screen {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.screen-content {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  text-align: center;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  /* REMOVE background if set */
+  background: transparent;
+
+  /* Optional: remove default border-radius or shadows if applied */
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.call-icon {
+  font-size: 2rem;
+  color: #34C759;
+  animation: ring 1s infinite;
+}
+
+@keyframes ring {
+  0%   { transform: rotate(0); }
+  15%  { transform: rotate(15deg); }
+  30%  { transform: rotate(-12deg); }
+  45%  { transform: rotate(8deg); }
+  60%  { transform: rotate(-5deg); }
+  75%  { transform: rotate(3deg); }
+  100% { transform: rotate(0); }
+}
+
+.phone-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 0.2px;
+}
+
+.call-button {
+  background: #34C759; /* iPhone green */
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  /* cursor: not-allowed; */
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(52, 199, 89, 0.4);
+}
+
+
+.phone-frame {
+  position: relative;
+  width: clamp(220px, 28vw, 360px);
+  height: clamp(440px, 56vw, 720px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@keyframes phoneFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+.bubble {
+  background: #f0f0f0;
+  color: #000;
+  padding: 1rem 1.2rem;
+  border-radius: 20px;
+  max-width: 250px;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: scale(0.5);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+  position: relative;
+    transition: all 0.6s ease;
+
+  transform-origin: center;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.bubble.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes bubbleWiggle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-3px) scale(1.02);
+  }
+  50% {
+    transform: translateY(0px) scale(0.99);
+  }
+  75% {
+    transform: translateY(2px) scale(1.01);
+  }
+}
+
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.bubble-top-right,
+.bubble-left {
+  background: #007aff;
+  color: white;
+}
+
+@keyframes bubbleEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.bubble-top-left::after {
+  bottom: -6px;
+  left: 30px;
+}
+.bubble-top-right::after {
+  bottom: -6px;
+  right: 30px;
+}
+.bubble-left::after {
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%) rotate(45deg);
+}
+.bubble-right::after {
+  top: 50%;
+  left: -6px;
+  transform: translateY(-50%) rotate(45deg);
+}
+.bubble-bottom::after {
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+
+.bubble:nth-of-type(1) { animation-delay: 0.1s; }
+.bubble:nth-of-type(2) { animation-delay: 0.25s; }
+.bubble:nth-of-type(3) { animation-delay: 0.4s; }
+.bubble:nth-of-type(4) { animation-delay: 0.55s; }
+.bubble:nth-of-type(5) { animation-delay: 0.7s; }
+.bubble:nth-of-type(6) { animation-delay: 0.85s; }
+
+.bubble:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+
+/* Responsive: hide sides if needed */
+@media (max-width: 768px) {
+  .phone-bubble-orbit-grid {
+    grid-template-areas:
+    "top-left    phone     top-right"
+    "left        phone     right"
+    ".           bottom    .";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    justify-items: center;
+    row-gap: 1.5rem;
+  }
+}
+
+
+</style>
+
+
+
+
+
+<style>
+
+.menu-cta-button {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2rem;
+  right: 2rem;
+  text-align: center;
+}
+
+.close-drawer {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: color 0.3s ease;
+}
+
+.close-drawer:hover {
+  color: #4C8ED9;
+}
+
+
+.menu-cta-button a {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background: linear-gradient(120deg, #3C7FCB, #4C8ED9);
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 12px rgba(76, 142, 217, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  text-decoration: none;
+}
+
+.menu-cta-button a:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(120deg, #4C8ED9, #5daeff);
+  box-shadow: 0 0 20px rgba(76, 142, 217, 0.5), 0 0 40px rgba(76, 142, 217, 0.15);
+}
+
+
+
+    .try-section {
+  padding: 8rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.try-section h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #4C8ED9;
+  text-shadow: 0 0 10px rgba(179, 136, 255, 0.4);
+  animation: glowPulse 3s ease-in-out infinite alternate;
+}
+
+@media (max-width: 700px) {
+  .try-section h2 {
+    font-size: 2.2rem;
+  }
+}
+
+.section-glow {
+  color: #4C8ED9;
+  font-weight: 700;
+  text-shadow: none;
+  animation: none;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 768px) {
+  .section-glow {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-glow {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .bubble-right,
+  .bubble-top-right {
+    display: none;
+  }
+
+  .bubble-bottom {
+    margin-top: 1rem;
+  }
+}
+
+
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 10px rgba(179, 136, 255, 0.3); }
+  100% { text-shadow: 0 0 20px rgba(179, 136, 255, 0.6); }
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 4px #3C7FCB);
+  transition: transform 0.3s ease;
+}
+
+.quote-card:hover .card-icon {
+  transform: scale(1.1) rotate(2deg);
+}
+
+.quote-card {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+  width: 280px;
+  box-shadow: 0 0 20px rgba(159, 105, 255, 0.05);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  backdrop-filter: blur(4px);
+    width: 100%;
+  max-width: 320px; /* 💡 Gives them room to center properly */
+  flex: 1 1 300px;
+    transform: scale(0.92);
+      opacity: 0.3;
+
+
+}
+
+@media (max-width: 700px) {
+  .quote-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quote-card {
+    width: 90%;
+    max-width: 100%;
+  }
+}
+
+.quote-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border: 1px solid #3C7FCB;
+  box-shadow: 0 0 30px rgba(159, 105, 2f55, 0.15);
+}
+
+.quote-card.featured {
+  border: 2px solid #4C8ED9;
+background: linear-gradient(to bottom right, #1a1a1a, #1e2a3a);
+  box-shadow: 0 0 30px rgba(179, 136, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+    padding-bottom: calc(2.5rem + 3rem); /* existing padding + extra space for button */
+  transform: scale(1.05);
+    opacity: 1;
+}
+
+
+.quote-card.left,
+.quote-card.right {
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.quote-card.featured::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+background: linear-gradient(to bottom right, #1a1a1a, #1e2a3a);
+  animation: rotateGlow 12s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.quote-card h3,
+.quote-card ul,
+.quote-card button {
+  position: relative;
+  z-index: 1;
+}
+
+    .pricing-section {
+  background: #0a0a0a;
+  padding: 8rem 2rem;
+  color: white;
+  text-align: center;
+}
+/* 
+.pricing-section h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #4C8ED9;
+  margin-bottom: 1rem;
+} */
+
+.pricing-subtext {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 4rem;
+}
+
+.quote-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* already present, good */
+  align-items: stretch; /* ensures equal height if desired */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto; /* 🔥 This ensures proper horizontal centering */
+}
+
+.quote-card {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+  width: 300px;
+  box-shadow: 0 0 30px rgba(159, 105, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quote-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 40px rgba(159, 105, 255, 0.2);
+}
+
+.quote-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #4C8ED9;
+}
+
+@media (max-width: 768px) {
+  .carousel-track {
+    display: flex;
+    justify-content: center;
+    transform: none !important; /* disable JS transform */
+    gap: 0;
+    width: 100%;
+  }
+
+  .carousel-track .quote-card {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+  }
+
+  .carousel-track .quote-card.featured {
+    display: block !important;
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    margin: 0 auto;
+    width: 90vw;
+    max-width: 90vw;
+  }
+
+  .carousel-container {
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  /* .carousel-arrow {
+    display: none;
+  } */
+}
+
+
+.quote-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  text-align: left;
+}
+
+.quote-card ul li {
+  margin-bottom: 0.75rem;
+  color: #ddd;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.quote-card ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #3C7FCB;
+  font-size: 0.9rem;
+}
+
+.quote-card button {
+  background: transparent;
+  border: 2px solid #3C7FCB;
+  color: #3C7FCB;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.quote-card button:hover {
+  background: #3C7FCB;
+  color: black;
+}
+
+.quote-card.featured {
+  border: 2px solid #4C8ED9;
+  background: linear-gradient(to bottom right, #1a1a1a, #2b1f3f);
+  transform: scale(1.05);
+      padding-bottom: calc(2.5rem + 3rem); /* existing padding + extra space for button */
+
+}
+
+.voicewave-inline {
+  width: 100%;
+  height: 35px;
+  object-fit: cover;
+  margin-top: 1rem;
+  animation: waveFadeIn 0.6s ease forwards;
+  pointer-events: none;
+  filter: brightness(0.4) saturate(1.2);
+  mix-blend-mode: screen;
+}
+
+@keyframes waveFadeIn {
+  from {
+    transform: scaleX(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 0.15;
+  }
+}
+
+
+.dropdown-desc {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
+}
+
+.software-list li.active .dropdown-desc {
+  opacity: 1;
+  max-height: 100px;
+  transform: translateY(0);
+  color: #ccc;
+  font-size: 1rem;
+  margin-top: 0.6rem;
+}
+
+
+.software-title {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.software-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 1000px;
+  margin-left: 2rem;
+}
+
+.software-list li {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: white;
+  position: relative;
+  padding-left: 2rem;
+  line-height: 1.4;
+  border-left: 3px solid #3C7FCB;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background: linear-gradient(90deg, rgba(159,105,255,0.08), rgba(255,255,255,0));
+  
+  /* 🧠 Enhanced transition */
+  transition: transform 0.35s ease-in-out, opacity 0.3s ease, color 0.3s ease;
+  transform: scale(1);
+  opacity: 0.4;
+}
+
+.software-list li:hover {
+  transform: scale(1.02);
+  color: #6FA8DC;
+  background: linear-gradient(to right, #12161f, #1d2434);
+  border-left-color: #6FA8DC;
+  box-shadow: 0 0 20px rgba(111, 168, 220, 0.3);
+}
+
+.software-list li.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.software-list li:hover {
+  transform: translateX(10px);
+  color: #4C8ED9;
+}
+
+.software-list li.highlight {
+  transform: translateX(10px);
+  color: #6FA8DC;
+  background: linear-gradient(90deg, rgba(159,105,255,0.12), rgba(255,255,255,0));
+}
+
+.software-list li.active {
+  opacity: 1;
+  color: #4C8ED9;
+}
+
+
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background-color: #4C8ED9;
+  transition: width 7s linear;
+}
+
+.software-list li.active .progress-bar {
+  width: 100%;
+}
+
+
+.software-flash-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding-top: 5rem;
+}
+
+.software-highlight-section {
+  height: 100vh;      
+  max-height: 100vh;                  /* allow it to grow if needed */
+  max-width: 100vw;                         /* prevent horizontal spillage */
+  overflow-x: hidden;                       /* avoid side scroll */
+  overflow-y: auto;                         /* allow vertical scroll if content overflows */
+  padding: 4rem 2rem 10rem;                 /* extra bottom padding to push next section down */
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  background: black;
+}
+
+@media (max-width: 600px) {
+  .software-highlight-section {
+    padding-bottom: 14rem; /* More breathing room on smaller devices */
+  }
+}
+
+@media (max-width: 1200px) {
+  .software-list li {
+    font-size: 1.8rem;
+    padding-left: 1rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .software-list li .dropdown-desc {
+    font-size: 0.95rem;
+  }
+
+  .software-highlight-section {
+    padding-bottom: 16rem; /* optional extra space at the bottom */
+  }
+}
+
+.software-highlight-section h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  text-align: left;
+  width: 100%;
+  padding-left: 2rem;
+}
+
+
+
+.flash-line {
+  font-size: 1.2rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  margin: 1rem 0;
+}
+
+
+.about-section {
+  background: #0a0a0a;
+  padding: 8rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  scroll-margin-top: 100px;
+}
+
+.about-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 4rem;
+  flex-direction: row-reverse; /* default: row layout with image on left */
+}
+
+/* Mobile: stack vertically with text above image */
+/* Only stack on smaller phone widths (≤ 500px) */
+.mobile-receptionist-image {
+  display: none;
+}
+@media (max-width: 700px) {
+    .quote-cards {
+  flex-direction: column;
+  align-items: center;
+      width: 90%;
+
+}
+
+.quote-card {
+  width: 90%;
+}
+
+ .effect-stack {
+    display: none;
+  }
+  .about-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-text,
+  .about-image {
+    width: 100%;
+    text-align: center;
+  }
+
+  .about-text h2 {
+    font-size: 1.75rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+  }
+
+  /* Keep image full width and stacked horizontally */
+  .effect-stack {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: auto;
+    gap: 0;
+  }
+
+  .img-layer {
+    position: static;
+    height: auto;
+    width: 100%;
+    flex: 1;
+    animation: none !important;
+    opacity: 1;
+    background-size: cover;
+  }
+  .software-highlight-section h2 {
+    font-size: 2rem;          /* shrink title */
+    padding-left: 1rem;
+  }
+
+   .software-list {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .software-list li {
+    font-size: 1.2rem;        /* smaller text */
+    padding-left: 1rem;       /* reduce left padding */
+    margin-bottom: 2rem;      /* reduce spacing between items */
+    line-height: 1.3;
+  }
+
+  .dropdown-desc {
+    font-size: 0.95rem;       /* shrink paragraph text too */
+  }
+
+  /* .pricing-section h2 {
+    font-size: 2.2rem;
+  } */
+}
+.about-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  max-height: 100%;
+}
+.about-text h2 {
+  font-size: 2.0rem; /* base size for mid-sized screens */
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+}
+
+.about-text h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #3C7FCB;
+  margin-top: 0.5rem;
+}
+
+.about-text p {
+  font-size: 1.1rem; /* base size */
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  color: #bbbbbb;
+}
+
+/* Larger screens (desktop +) */
+@media (min-width: 1200px) {
+  .about-text h2 {
+    font-size: 4rem; /* ~40px */
+  }
+
+  .about-text p {
+    font-size: 1.8rem; /* ~19px */
+  }
+
+    .software-highlight-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .software-list {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .software-list li {
+    font-size: 2.2rem;
+    padding-left: 2.5rem;
+  }
+
+  .dropdown-desc {
+    font-size: 1.25rem;
+  }
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+.about-inner {
+  align-items: center; /* already there */
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.effect-stack {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(159, 105, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .effect-stack {
+    height: 500px;
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.pricing-section {
+  background: #0a0a0a;
+  padding: 8rem 2rem;
+  color: white;
+  text-align: center;
+}
+
+</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.faq-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const answer = button.nextElementSibling;
-        const icon = button.querySelector('i');
-
-        if (answer.style.display === 'none' || answer.style.display === '') {
-          answer.style.display = 'block';
-          icon.classList.remove('bi-plus');
-          icon.classList.add('bi-dash');
-        } else {
-          answer.style.display = 'none';
-          icon.classList.remove('bi-dash');
-          icon.classList.add('bi-plus');
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.img-layer').forEach(el => {
+            el.style.animationPlayState = 'running';
+          });
+          observer.disconnect(); // only run once
         }
       });
+    },
+    {
+      threshold: 0.8, // only fire when 80% of the section is visible
+      rootMargin: "0px 0px -10% 0px" // fine-tune so it doesn't fire too early
+    }
+  );
+
+  const effectStack = document.querySelector('.effect-stack');
+  if (effectStack) observer.observe(effectStack);
+});
+</script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('hero-bg-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 5;
+
+    const geometry = new THREE.IcosahedronGeometry(1.5, 20);
+const material = new THREE.MeshPhysicalMaterial({
+  color: 0x00ffff,
+  roughness: 0.2,
+  metalness: 0.8,
+  clearcoat: 1.0,
+  clearcoatRoughness: 0.1,
+  emissive: new THREE.Color(0x00ffff),
+  emissiveIntensity: 0.2,
+  flatShading: true
+});
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 5, 5);
+    scene.add(light);
+
+    const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+    scene.add(ambient);
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  const time = performance.now() * 0.001;
+
+  // Rotate like before
+  mesh.rotation.x += 0.002;
+  mesh.rotation.y += 0.003;
+
+  // Add smooth, floating movement across screen
+  mesh.position.x = Math.sin(time * 0.5) * 0.6;
+  mesh.position.y = Math.cos(time * 0.4) * 0.4;
+
+  // Slight pulsating scale
+  const scaleFactor = 1 + 0.1 * Math.sin(time * 2);
+  mesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+  renderer.render(scene, camera);
+}
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
     });
   });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const listItems = document.querySelectorAll('.software-list li');
+  let currentIndex = 0;
+  let isPaused = false;
+  let intervalId;
 
-        <section 
-            class="tw-flex tw-w-full tw-flex-col tw-place-content-center tw-place-items-center tw-gap-[10%] tw-p-[5%] tw-px-[10%] max-md:tw-px-2"
-        >
-            <div style="width: 100vw;"
-                class="tw-flex tw-w-full tw-max-w-[80%] tw-place-content-center tw-place-items-center tw-justify-between tw-gap-3 
-                        tw-rounded-lg tw-bg-[#F6F7FB] dark:tw-bg-[#171717] tw-p-6 max-md:tw-max-w-full max-md:tw-flex-col"
-            >
-                <div 
-                class="tw-flex tw-flex-col max-lg:tw-text-center tw-gap-1">
-                    <h2 class="tw-text-2xl tw-text-gray-800 dark:tw-text-gray-200 max-md:tw-text-xl">
-                        Join our newsletter
-                    </h2>
-                    <div class="tw-text-gray-700 dark:tw-text-gray-300">Get product insights and updates.</div>
-                </div>
+  function activateItem(index) {
+    listItems.forEach((item, i) => {
+      item.classList.remove('active');
+      item.querySelector('.progress-bar').style.width = '0%';
 
-                <div
-                    class="tw-flex tw-h-[60px] tw-place-items-center tw-gap-2 tw-overflow-hidden tw-p-2"
-                >
-                    <input
-                        type="email"
-                        class="input tw-h-full tw-w-full !tw-border-gray-600 tw-p-2 tw-outline-none"
-                        placeholder="email"
-                    />
-                    <a
-                        class="btn !tw-rounded-full !tw-border-[1px] !tw-text-black !tw-border-solid !tw-border-black  dark:!tw-text-white
-                            dark:!tw-border-gray-300 !tw-bg-transparent tw-transition-colors tw-duration-[0.3s]"
-                        href=""
-                    >
-                        Signup
-                    </a>
-                </div>
-            </div>
-        </section>
+      const wave = item.querySelector('.voicewave-inline');
+      if (wave) wave.remove();
+    });
+
+    const item = listItems[index];
+    item.classList.add('active');
+    item.querySelector('.progress-bar').style.width = '100%';
+
+    const waveImg = document.createElement('img');
+    waveImg.src = 'assets/voicewave.gif';
+    waveImg.alt = 'voicewave animation';
+    waveImg.classList.add('voicewave-inline');
+    item.appendChild(waveImg);
+  }
+
+  function startCycle() {
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      if (!isPaused) {
+        activateItem(currentIndex);
+        currentIndex = (currentIndex + 1) % listItems.length;
+      }
+    }, 15000);
+  }
+
+  // Desktop: hover
+  listItems.forEach((item, i) => {
+    item.addEventListener('mouseenter', () => {
+      isPaused = true;
+      activateItem(i);
+      currentIndex = (i + 1) % listItems.length;
+    });
+
+    item.addEventListener('mouseleave', () => {
+      isPaused = false;
+    });
+
+    // Mobile: tap/click
+    item.addEventListener('click', () => {
+      isPaused = true;
+      activateItem(i);
+      currentIndex = (i + 1) % listItems.length;
+    });
+  });
+
+  // Start with first item
+  activateItem(currentIndex);
+  startCycle();
+});
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        // Scrolling down
+        header.classList.add('hidden');
+      } else {
+        // Scrolling up
+        header.classList.remove('hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+  });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const bubblesInOrder = [
+    '.bubble-top-left',
+    '.bubble-left',
+    '.bubble-bottom',
+    '.bubble-right',
+    '.bubble-top-right'
+  ];
+
+  const options = {
+    threshold: 0.4
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateBubblesSequentially();
+        obs.disconnect();
+      }
+    });
+  }, options);
+
+  const trySection = document.getElementById('try');
+  if (trySection) observer.observe(trySection);
+
+  function animateBubblesSequentially() {
+    let delay = 0;
+
+    bubblesInOrder.forEach(selector => {
+      const bubble = document.querySelector(selector);
+      setTimeout(() => {
+        bubble.classList.add('visible');
+      }, delay);
+      delay += 800; // time between each pop
+    });
+  }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".carousel-track");
+  const cards = Array.from(track.children);
+  let currentIndex = 3;
+
+  function getWrappedIndex(index) {
+    const len = cards.length;
+    return ((index % len) + len) % len;
+  }
+
+function updateCarousel() {
+  const len = cards.length;
+
+  cards.forEach((card, index) => {
+    card.classList.remove("featured");
+    card.style.opacity = "0.2";
+    card.style.transform = "scale(0.9)";
+  });
+
+  const prev = getWrappedIndex(currentIndex - 1);
+  const next = getWrappedIndex(currentIndex + 1);
+
+  cards[prev].style.opacity = "0.6";
+  cards[prev].style.transform = "scale(0.95)";
+  cards[prev].style.zIndex = "1";
+
+  cards[next].style.opacity = "0.6";
+  cards[next].style.transform = "scale(0.95)";
+  cards[next].style.zIndex = "1";
+
+  cards[currentIndex].classList.add("featured");
+  cards[currentIndex].style.opacity = "1";
+  cards[currentIndex].style.transform = "scale(1)";
+  cards[currentIndex].style.zIndex = "2";
+
+  // Just update the transform – CSS handles the transition
+  const cardWidth = cards[0].offsetWidth + 32;
+  const shiftX = -(cardWidth * currentIndex) + track.offsetWidth / 2 - cardWidth / 2;
+  track.style.transform = `translateX(${shiftX}px)`;
+}
+
+
+  document.querySelector(".carousel-arrow.left").addEventListener("click", () => {
+    currentIndex = getWrappedIndex(currentIndex - 1);
+    updateCarousel();
+  });
+
+  document.querySelector(".carousel-arrow.right").addEventListener("click", () => {
+    currentIndex = getWrappedIndex(currentIndex + 1);
+    updateCarousel();
+  });
+
+  updateCarousel();
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('menuToggle');
+  const menuDrawer = document.querySelector('.menu-drawer');
+  const closeBtn = document.getElementById('closeDrawerBtn');
+
+  // Open the drawer
+  menuBtn.addEventListener('click', () => {
+    menuDrawer.classList.add('menu-open');
+  });
+
+  // Close the drawer
+  closeBtn.addEventListener('click', () => {
+    menuDrawer.classList.remove('menu-open');
+  });
+
+  // Close on any internal anchor link
+  const anchorLinks = menuDrawer.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuDrawer.classList.remove('menu-open');
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuLinks = document.querySelectorAll('.menu-drawer a[href^="#"]');
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href").substring(1);
+      const targetEl = document.getElementById(targetId);
+      const header = document.querySelector("header");
+
+      if (targetEl) {
+        const headerHeight = header ? header.offsetHeight : 80;
+        const buffer = 12; // ✅ use a small positive value to prevent section clipping
+
+        const scrollOffset = headerHeight + buffer;
+        const top = targetEl.getBoundingClientRect().top + window.pageYOffset - scrollOffset;
+
+        window.scrollTo({
+          top,
+          behavior: "smooth"
+        });
+
+        document.querySelector(".menu-drawer").classList.remove("menu-open");
+      }
+    });
+  });
+});
+
+</script>
+
+<script>
+function calculateROI() {
+  const missedCalls = parseFloat(document.getElementById('missedCalls').value);
+  const callValue = parseFloat(document.getElementById('callValue').value);
+  const closeRate = parseFloat(document.getElementById('closeRate').value);
+  const resultEl = document.getElementById('roiResult');
+
+  if (isNaN(missedCalls) || isNaN(callValue) || isNaN(closeRate)) {
+    resultEl.textContent = "Please enter valid numbers for all fields.";
+    return;
+  }
+
+  const closeRateDecimal = Math.min(closeRate, 100) / 100;
+  const estimatedROI = missedCalls * callValue * closeRateDecimal;
+
+  resultEl.textContent = `Estimated Monthly ROI: $${estimatedROI.toLocaleString(undefined, {
+    maximumFractionDigits: 0
+  })}`;
+}
+
+
+</script>
 
 
 
-        <footer
-            class="tw-mt-auto tw-flex tw-flex-col tw-w-full tw-gap-4 tw-text-sm tw-pt-[5%] tw-pb-10 tw-px-[10%] 
-                    tw-text-black dark:tw-text-white max-md:tw-flex-col"
-        >
-            <div class="tw-flex max-md:tw-flex-col max-md:tw-gap-6 tw-gap-3 tw-w-full tw-place-content-around">
-                <div
-                    class="tw-flex tw-h-full tw-w-[250px] tw-flex-col tw-place-items-center tw-gap-6 max-md:tw-w-full"
-                >   
-                    <a href="#" class="tw-w-full tw-place-items-center tw-flex tw-flex-col tw-gap-6">
-                        <img
-                            src="./assets/logo/logo.png"
-                            alt="logo"
-                            srcset=""
-                            class="tw-max-w-[120px] dark:tw-invert"
-                        />
-                        <div class="tw-max-w-[120px] tw-text-center tw-text-3xl tw-h-fit">
-                            Nyvori
-                        </div>
-                    </a>
-                    <!-- <div class="tw-mt-3 tw-text-lg tw-font-semibold">Follow us</div> -->
-                    <div class="tw-flex tw-gap-4 tw-text-lg">
-                    <!-- Gmail -->
-                    <a
-                        href="mailto:contact@nyvori.com"
-                        aria-label="Email"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i class="bi bi-envelope-fill"></i>
-                    </a>
 
-                    <!-- Instagram -->
-                    <a
-                        href="https://www.instagram.com/nyvori.co/"
-                        aria-label="Instagram"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i class="bi bi-instagram"></i>
-                    </a>
-
-                    <!-- LinkedIn -->
-                    <a
-                        href="https://www.linkedin.com/"
-                        aria-label="LinkedIn"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i class="bi bi-linkedin"></i>
-                    </a>
-                    </div>
-
-
-                </div>
-
-                <div class="tw-flex max-md:tw-flex-col tw-flex-wrap tw-gap-6 tw-h-full tw-w-full tw-justify-around">
-                    <div class="tw-flex tw-h-full tw-w-[200px] tw-flex-col tw-gap-4">
-                        <h2 class="tw-text-xl">Resources</h2>
-                        <div class="tw-flex tw-flex-col tw-gap-3">
-                            <a href="#" class="footer-link">Getting started</a>
-                            <a href="#" class="footer-link">Test Our Product</a>
-                            <a href="#" class="footer-link">Our Software</a>
-                            <a href="#" class="footer-link">Health status</a>
-                            <a href="#" class="footer-link">Pricing</a>
-                            <a href="#" class="footer-link">FAQ</a>
-                        </div>
-                    </div>
-
-
-                    <div class="tw-flex tw-h-full tw-w-[200px] tw-flex-col tw-gap-4">
-                        <h2 class="tw-text-xl">Contact</h2>
-                        <div class="tw-flex tw-flex-col tw-gap-3">
-                            <a href="#" class="footer-link">contact@nyvori.com</a>
-                            <a href="#" class="footer-link">(916) 880-8234</a>
-                            
-                        </div>
-                    </div>
-
-                    <div class="tw-flex tw-h-full tw-w-[200px] tw-flex-col tw-gap-4">
-                        <h2 class="tw-text-xl">Socials</h2>
-                        <div class="tw-flex tw-flex-col tw-gap-3">
-                            <a href="#" class="footer-link">Instagram</a>
-                            <a href="#" class="footer-link">Twitter</a>
-                            <a href="#" class="footer-link">Facebook</a>
-                            <a href="#" class="footer-link">Linkedin</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="tw-mt-8">
-            <div class="tw-mt-2 tw-flex tw-gap-2 tw-flex-col tw-text-gray-700 dark:tw-text-gray-300 tw-place-items-center 
-                    tw-text-[12px] tw-w-full tw-text-center tw-place-content-around">
-                <span>Copyright &#169; 2023-2025</span>
-                <span>All trademarks and copyrights belong to their respective owners.</span>
-            </div>
-
-        </footer>
-    </body>
-
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"
-        integrity="sha512-B1lby8cGcAUU3GR+Fd809/ZxgHbfwJMp0jLTVfHiArTuUt++VqSlJpaJvhNtRf3NERaxDNmmxkdx2o+aHd4bvw=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    ></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/ScrollTrigger.min.js"
-        integrity="sha512-AY2+JxnBETJ0wcXnLPCcZJIJx0eimyhz3OJ55k2Jx4RtYC+XdIi2VtJQ+tP3BaTst4otlGG1TtPJ9fKrAUnRdQ=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    ></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js" integrity="sha512-hIlMpy2enepx9maXZF1gn0hsvPLerXoLHdb095CmRY5HG3bZfN7XPBZ14g+TUDH1aGgfLyPHmY9/zuU53smuMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="./scripts/components.js"></script>
-    <script src="./index.js"></script>
-
-    <!-- By Paul: https://github.com/PaulleDemon -->
+</body>
 </html>
